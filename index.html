@@ -1,0 +1,486 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NOBODY COFFEE — 무인카페 가맹 1기 모집</title>
+  <meta name="description" content="점주님이 없어도, 매장은 잘 돌아가요. 무인카페 NOBODY COFFEE가 첫 번째 가맹점주님을 찾습니다.">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- ============ Header ============ -->
+  <header class="header" id="header">
+    <div class="container header__inner">
+      <a class="logo" href="#hero" aria-label="NOBODY COFFEE 처음으로">NOBODY COFFEE</a>
+      <nav class="nav" aria-label="주요 메뉴">
+        <a href="#manager">보이지 않는 점장</a>
+        <a href="#day">매장의 하루</a>
+        <a href="#process">가맹 절차</a>
+        <a href="#faq">자주 묻는 질문</a>
+      </nav>
+      <a class="btn btn--sm" href="#contact">가맹 상담</a>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ============ 1. 히어로 ============ -->
+    <section class="section hero" id="hero">
+      <div class="container">
+        <span class="sticker hero__chip" data-reveal="pop">가맹 1기 모집 중</span>
+        <h1 class="display" data-reveal>
+          점주님이 없어도,<br>
+          매장은 <span class="hl">잘 돌아가요.</span>
+        </h1>
+
+        <div class="hero__body">
+          <div class="hero__text" data-reveal style="--d:.15s">
+            <p class="lead">무인카페 NOBODY COFFEE가 첫 번째 가맹점주님을 찾습니다.</p>
+            <a class="btn" href="#contact">가맹 상담 문의
+              <svg class="btn__arrow" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 11 C 12 9, 22 12, 34 10 M26 3 C 29 6, 32 8, 36 10 C 32 12, 29 14, 27 17"/></svg>
+            </a>
+            <p class="scroll-hint">걱정부터 들어볼게요 <span class="scroll-hint__arrow" aria-hidden="true">↓</span></p>
+          </div>
+
+          <div class="hero__media" data-reveal style="--d:.25s">
+            <figure class="ph" style="--ratio:3/2" data-src="asset/img/hero-empty-store.webp">
+              <figcaption class="ph__label"><b>hero-empty-store.webp</b>새벽, 불 켜진 빈 매장 내부<br>빈 좌석과 커피 머신이 한 컷에 보이게</figcaption>
+            </figure>
+
+            <!-- 낙서 1: 빈 좌석 화살표 -->
+            <div class="note note--seat">
+              <span class="note__text">아무도 없음</span>
+              <svg class="doodle" viewBox="0 0 120 90" aria-hidden="true"><path pathLength="1" d="M8 10 C 30 14, 62 26, 86 56 C 92 64, 96 72, 99 80 M84 72 C 90 76, 95 79, 100 82 C 101 76, 103 70, 105 64"/></svg>
+            </div>
+            <!-- 낙서 2: 커피 머신 동그라미 -->
+            <div class="note note--machine">
+              <svg class="doodle doodle--circle" viewBox="0 0 200 160" aria-hidden="true"><path pathLength="1" d="M110 12 C 58 6, 14 34, 12 78 C 10 124, 62 150, 112 146 C 164 142, 192 112, 188 72 C 184 34, 146 8, 96 14"/></svg>
+              <span class="note__text">근데 다 되어 있음</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 2. 현실 공감 ============ -->
+    <section class="section section--dark worry" id="worry">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <h2 class="sec-title">무인카페, <span class="hl">솔직히</span> 걱정되시죠?</h2>
+          <p class="sec-sub">저희도 점주였을 때 똑같았어요. 그래서 걱정부터 꺼내 봤습니다.</p>
+        </div>
+
+        <ol class="worry__cards" data-reveal="drop">
+          <li class="worry-card" style="--r:-3deg">
+            <span class="num-chip">걱정 <b>01</b></span>
+            <h3 class="worry-card__title">새벽 2시에 머신이 멈추면요?</h3>
+            <p>문 닫을 사람도, 고칠 사람도 없는 시간이죠.</p>
+          </li>
+          <li class="worry-card" style="--r:2deg">
+            <span class="num-chip">걱정 <b>02</b></span>
+            <h3 class="worry-card__title">청소는 결국 제가 해야 하죠?</h3>
+            <p>무인이라더니, 퇴근길마다 매장에 들르게 됩니다.</p>
+          </li>
+          <li class="worry-card" style="--r:-1.5deg">
+            <span class="num-chip">걱정 <b>03</b></span>
+            <h3 class="worry-card__title">커피 한 잔에 다섯 시간 앉아 계시면요?</h3>
+            <p>자리는 꽉 찼는데, 매출은 그대로예요.</p>
+          </li>
+          <li class="worry-card" style="--r:3.5deg">
+            <span class="num-chip">걱정 <b>04</b></span>
+            <h3 class="worry-card__title">광고만큼 벌 수 있을까요?</h3>
+            <p>“월 순수익 보장”이라는 말, 믿어도 될까요?</p>
+          </li>
+        </ol>
+
+        <p class="worry__foot" data-reveal>네 가지 모두, 아래에서 하나씩 답해 드릴게요.</p>
+      </div>
+    </section>
+
+    <!-- ============ 3. 보이지 않는 점장 ============ -->
+    <section class="section manager" id="manager">
+      <div class="container">
+        <div class="manager__head">
+          <div class="sec-head" data-reveal>
+            <h2 class="sec-title">그래서,<br><span class="hl">보이지 않는 점장</span>을 두었습니다.</h2>
+            <p class="sec-sub">매장에는 아무도 없지만, 본사에서는 24시간 누군가 보고 있어요.</p>
+          </div>
+          <div class="manager__media" data-reveal style="--d:.15s">
+            <figure class="ph" style="--ratio:4/3" data-src="asset/img/manager-machine.webp">
+              <figcaption class="ph__label"><b>manager-machine.webp</b>커피 머신 클로즈업<br>디스플레이·버튼이 켜진 상태</figcaption>
+            </figure>
+            <div class="note note--watch">
+              <svg class="doodle" viewBox="0 0 110 70" aria-hidden="true"><path pathLength="1" d="M104 8 C 80 10, 50 22, 28 44 C 22 50, 17 56, 13 62 M28 60 C 22 61, 17 62, 12 63 C 12 57, 12 51, 13 45"/></svg>
+              <span class="note__text">여기, 본사가 보고 있어요</span>
+            </div>
+          </div>
+        </div>
+
+        <ul class="box-grid box-grid--4 manager__grid" data-reveal="stagger">
+          <li class="answer">
+            <span class="num-chip num-chip--line">걱정 <b>01</b>에 대한 답</span>
+            <svg class="icon" viewBox="0 0 56 56" aria-hidden="true"><rect x="6" y="9" width="44" height="30" rx="2"/><path d="M12 25 h8 l4 -8 l6 16 l4 -8 h10 M22 47 h12 M28 39 v8"/></svg>
+            <h3 class="answer__name">원격 관제</h3>
+            <p class="answer__desc">머신 상태, 원두·우유 잔량, 매장 온도를 본사가 실시간으로 봐요. 이상이 생기면 점주님보다 먼저 알아요.</p>
+            <p class="stat"><strong>24시간</strong> 모니터링</p>
+          </li>
+          <li class="answer">
+            <span class="num-chip num-chip--line">걱정 <b>01</b>에 대한 답</span>
+            <svg class="icon" viewBox="0 0 56 56" aria-hidden="true"><path d="M36 8 a10 10 0 0 0 -9 14 L9 40 a4.5 4.5 0 0 0 7 7 L34 29 a10 10 0 0 0 14 -9 l-6 6 l-7 -2 l-2 -7 z"/></svg>
+            <h3 class="answer__name">출동 A/S</h3>
+            <p class="answer__desc">원격으로 안 되는 고장은 기사님이 바로 갑니다. 새벽에도요.</p>
+            <p class="stat">평균 <strong>1시간 48분</strong> 도착</p>
+          </li>
+          <li class="answer">
+            <span class="num-chip num-chip--line">걱정 <b>02</b>에 대한 답</span>
+            <svg class="icon" viewBox="0 0 56 56" aria-hidden="true"><path d="M20 20 l3 -9 l3 9 l9 3 l-9 3 l-3 9 l-3 -9 l-9 -3 z M40 34 l2 -5 l2 5 l5 2 l-5 2 l-2 5 l-2 -5 l-5 -2 z M12 44 h32"/></svg>
+            <h3 class="answer__name">순회 관리</h3>
+            <p class="answer__desc">담당 매니저가 매일 매장을 돌며 청소와 재고를 챙겨요. 점주님은 앱으로 사진만 확인하시면 돼요.</p>
+            <p class="stat">매일 <strong>2회</strong> 위생 체크</p>
+          </li>
+          <li class="answer">
+            <span class="num-chip num-chip--line">걱정 <b>03</b>에 대한 답</span>
+            <svg class="icon" viewBox="0 0 56 56" aria-hidden="true"><path d="M10 12 v22 h20 M10 34 v14 M30 34 v14 M10 26 h20"/><circle cx="41" cy="17" r="9"/><path d="M41 12 v5 l3 3"/></svg>
+            <h3 class="answer__name">좌석 안내</h3>
+            <p class="answer__desc">좌석 QR로 이용 시간을 부드럽게 안내해요. 쫓아내지 않고, 자리가 돌게 만듭니다.</p>
+            <p class="stat">평균 체류 <strong>52분</strong></p>
+          </li>
+        </ul>
+
+        <p class="manager__foot" data-reveal>
+          04번 걱정은 조금 뒤에, 가장 솔직하게 답할게요.
+          <svg class="doodle doodle--down" viewBox="0 0 40 60" aria-hidden="true"><path pathLength="1" d="M20 4 C 16 20, 24 34, 20 52 M11 42 C 15 46, 18 50, 20 54 C 23 50, 26 46, 30 43"/></svg>
+        </p>
+      </div>
+    </section>
+
+    <!-- ============ 4. 매장의 하루 ============ -->
+    <section class="section day" id="day">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <h2 class="sec-title">점주님의 하루는 생각보다 <span class="hl">짧습니다.</span></h2>
+          <p class="sec-sub">NOBODY COFFEE 성수점의 어느 화요일을 그대로 옮겼어요.</p>
+        </div>
+
+        <div class="day__grid">
+          <!-- 좌측 고정 -->
+          <div class="day__aside">
+            <div class="day__sticky">
+              <p class="day__clock" aria-live="off"><span id="dayClock">06:50</span></p>
+              <div class="day__photos">
+                <figure class="ph is-active" style="--ratio:4/3" data-src="asset/img/day-morning.webp" data-phase="0">
+                  <figcaption class="ph__label"><b>day-morning.webp</b>아침 햇빛이 드는 빈 매장 창가</figcaption>
+                </figure>
+                <figure class="ph" style="--ratio:4/3" data-src="asset/img/day-afternoon.webp" data-phase="1">
+                  <figcaption class="ph__label"><b>day-afternoon.webp</b>낮, 사람 없는 매장 카운터·좌석</figcaption>
+                </figure>
+                <figure class="ph" style="--ratio:4/3" data-src="asset/img/day-night.webp" data-phase="2">
+                  <figcaption class="ph__label"><b>day-night.webp</b>밤, 불 켜진 매장 외관</figcaption>
+                </figure>
+              </div>
+            </div>
+          </div>
+
+          <!-- 우측 타임라인 -->
+          <div class="day__main">
+            <div class="day__track" aria-hidden="true"><span class="day__fill" id="dayFill"></span></div>
+
+            <ol class="day__list">
+              <li class="day-card" data-time="06:50" data-owner="0" data-phase="0">
+                <p class="day-card__time">06:50</p>
+                <dl class="day-card__rows">
+                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>머신 자가 점검, 원두·우유 잔량 확인</dd></div>
+                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>주무시는 중
+                    <svg class="zzz" viewBox="0 0 48 32" aria-hidden="true"><path d="M4 18 h10 l-10 10 h10 M20 8 h8 l-8 8 h8 M34 2 h6 l-6 6 h6"/></svg>
+                  </dd></div>
+                </dl>
+              </li>
+              <li class="day-card" data-time="08:10" data-owner="0" data-phase="0">
+                <p class="day-card__time">08:10</p>
+                <dl class="day-card__rows">
+                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>출근 시간 주문 몰림, 대기열 모니터링</dd></div>
+                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>출근하는 중</dd></div>
+                </dl>
+              </li>
+              <li class="day-card" data-time="11:30" data-owner="30" data-phase="1">
+                <p class="day-card__time">11:30</p>
+                <dl class="day-card__rows">
+                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>순회 매니저 방문, 청소·재고 보충</dd></div>
+                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>앱으로 청소 사진 확인 <mark>(30초)</mark></dd></div>
+                </dl>
+              </li>
+              <li class="day-card" data-time="14:20" data-owner="10" data-phase="1">
+                <p class="day-card__time">14:20</p>
+                <dl class="day-card__rows">
+                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>제빙기 온도 이상 감지 → 기사 출동 → 수리 완료</dd></div>
+                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>“처리 완료” 알림 확인 <mark>(10초)</mark></dd></div>
+                </dl>
+              </li>
+              <li class="day-card" data-time="19:40" data-owner="0" data-phase="2">
+                <p class="day-card__time">19:40</p>
+                <dl class="day-card__rows">
+                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>3시간째 앉아 계신 손님께 좌석 안내</dd></div>
+                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>저녁 드시는 중</dd></div>
+                </dl>
+              </li>
+              <li class="day-card" data-time="22:30" data-owner="300" data-phase="2">
+                <p class="day-card__time">22:30</p>
+                <dl class="day-card__rows">
+                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>자동 마감, 오늘의 리포트 발송</dd></div>
+                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>리포트 읽기 <mark>(5분)</mark></dd></div>
+                </dl>
+              </li>
+            </ol>
+
+            <p class="day__end" id="dayEnd" data-reveal>나머지 시간은, <span class="hl">점주님 거예요.</span></p>
+
+            <div class="day__counter" id="dayCounter">
+              <span class="day__counter-label">오늘 점주님이 쓴 시간</span>
+              <span class="day__counter-value" id="dayCounterValue">00:00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 5. 직영점 기록 ============ -->
+    <section class="section section--deep record" id="record">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <h2 class="sec-title">말보다 <span class="hl">14개월의 기록</span>을<br>보여드릴게요.</h2>
+          <p class="sec-sub">직영점 3곳(성수 · 망원 · 분당 정자)을 직접 운영하며 쌓은 숫자예요.</p>
+        </div>
+
+        <ul class="box-grid box-grid--4 record__stats" data-reveal="stagger">
+          <li class="metric">
+            <p class="metric__num">
+              <span data-count="99.2" data-decimals="1">99.2</span><small>%</small>
+              <svg class="doodle doodle--ring" viewBox="0 0 220 110" aria-hidden="true"><path pathLength="1" d="M128 10 C 70 4, 12 22, 10 56 C 8 92, 70 104, 120 102 C 176 100, 212 82, 210 52 C 208 22, 160 6, 102 12"/></svg>
+            </p>
+            <p class="metric__label">머신 가동률</p>
+            <p class="metric__desc">1년에 멈춘 시간, 다 합쳐도 하루가 조금 넘어요.</p>
+          </li>
+          <li class="metric">
+            <p class="metric__num">
+              <span data-count="1">1</span><small>시간</small> <span data-count="48">48</span><small>분</small>
+            </p>
+            <p class="metric__label">고장 출동 평균</p>
+            <p class="metric__desc">새벽 접수 건 포함한 평균이에요.</p>
+          </li>
+          <li class="metric">
+            <p class="metric__num">
+              <span data-count="83">83</span><small>%</small>
+              <svg class="doodle doodle--ring" viewBox="0 0 220 110" aria-hidden="true"><path pathLength="1" d="M128 10 C 70 4, 12 22, 10 56 C 8 92, 70 104, 120 102 C 176 100, 212 82, 210 52 C 208 22, 160 6, 102 12"/></svg>
+            </p>
+            <p class="metric__label">점주 연락 전 선조치</p>
+            <p class="metric__desc">대부분의 문제는 점주님이 모르는 사이에 끝나요.</p>
+          </li>
+          <li class="metric">
+            <p class="metric__num">
+              <span data-count="61">61</span><small>%</small>
+            </p>
+            <p class="metric__label">재방문 고객 비율</p>
+            <p class="metric__desc">깨끗하고 멈추지 않는 매장에는 다시 오더라고요.</p>
+          </li>
+        </ul>
+
+        <div class="founder">
+          <div class="polaroid" data-reveal="pop">
+            <figure class="ph" style="--ratio:1/1" data-src="asset/img/founder.webp">
+              <figcaption class="ph__label"><b>founder.webp</b>창업자 사진<br>매장 앞, 반신 또는 뒷모습</figcaption>
+            </figure>
+          </div>
+          <blockquote class="founder__quote" data-reveal style="--d:.15s">
+            <p>“무인카페를 2년 하면서 제일 무서웠던 건 새벽 2시의 전화였어요. 그 전화를 점주님 대신 저희가 받으려고 본사를 만들었습니다.”</p>
+            <footer>NOBODY COFFEE 대표 ○○○</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 6. 입지와 손익 구조 ============ -->
+    <section class="section profit" id="profit">
+      <div class="container">
+        <div class="sec-head sec-head--wide" data-reveal>
+          <span class="num-chip num-chip--line">걱정 <b>04</b>에 대한 답</span>
+          <h2 class="sec-title">수익은 약속하지 않습니다.<br>대신, <span class="hl">맞는 자리만</span> 권합니다.</h2>
+          <p class="sec-sub">무인카페의 손익은 커피 맛보다 자리에서 먼저 갈려요. 그래서 저희는 계약 전에 숫자부터 같이 봅니다.</p>
+        </div>
+
+        <div class="profit__grid">
+          <div class="profit__block box" data-reveal>
+            <h3 class="block-title">비용이 나가는 곳 5가지</h3>
+            <ol class="cost-list">
+              <li><span class="label">01</span><b>임대료</b><span>가장 크고, 가장 먼저 봐야 하는 비용</span></li>
+              <li><span class="label">02</span><b>원재료</b><span>원두, 우유, 컵</span></li>
+              <li><span class="label">03</span><b>공과금</b><span>전기, 수도, 통신</span></li>
+              <li><span class="label">04</span><b>관리 서비스</b><span>원격 관제, 순회 관리, A/S</span></li>
+              <li><span class="label">05</span><b>머신 유지</b><span>정기 점검, 소모품 교체</span></li>
+            </ol>
+          </div>
+
+          <div class="profit__block box" data-reveal style="--d:.1s">
+            <h3 class="block-title">저희가 보는 입지 기준 3가지</h3>
+            <ul class="criteria">
+              <li><b>시간대별 유동 인구</b><span>출근·점심·저녁 중 최소 두 번은 사람이 지나가는 곳</span></li>
+              <li><b>반경 300m 안 무인카페 수</b><span>이미 많으면 권하지 않아요</span></li>
+              <li><b>임대료 기준선</b><span>예상 매출에 비해 임대료가 기준을 넘으면, 계약을 말립니다</span></li>
+            </ul>
+          </div>
+
+          <div class="profit__proof" data-reveal style="--d:.2s">
+            <p class="proof__num"><span data-count="11">11</span><small>곳</small></p>
+            <p class="proof__label">지난 1년, 상담 후 저희가 먼저 말린 자리</p>
+            <p class="proof__desc">“좋은 자리가 나올 때까지 기다리는 것도 저희 일이에요.”</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 7. 가맹 절차 ============ -->
+    <section class="section section--deep process" id="process">
+      <div class="container">
+        <div class="sec-head" data-reveal>
+          <h2 class="sec-title">시작은 <span class="hl">상담 한 번</span>이면 충분해요.</h2>
+        </div>
+
+        <div class="steps" id="steps">
+          <div class="steps__track" aria-hidden="true"><span class="steps__fill" id="stepsFill"></span></div>
+          <ol class="steps__list">
+            <li class="step">
+              <span class="step__num">01</span>
+              <h3 class="step__name">상담</h3>
+              <p class="step__desc">궁금한 것부터 편하게 물어보세요.</p>
+              <span class="period">1일</span>
+            </li>
+            <li class="step">
+              <span class="step__num">02</span>
+              <h3 class="step__name">상권 분석</h3>
+              <p class="step__desc">후보 자리를 같이 보고, 숫자로 판단해요.</p>
+              <span class="period">1~2주</span>
+            </li>
+            <li class="step">
+              <span class="step__num">03</span>
+              <h3 class="step__name">계약</h3>
+              <p class="step__desc">입지가 맞을 때만 계약해요.</p>
+              <span class="period">1일</span>
+            </li>
+            <li class="step">
+              <span class="step__num">04</span>
+              <h3 class="step__name">교육 · 시공</h3>
+              <p class="step__desc">앱 사용법과 매장 세팅을 한 번에.</p>
+              <span class="period">3주</span>
+            </li>
+            <li class="step">
+              <span class="step__num">05</span>
+              <h3 class="step__name">첫 30일 동행</h3>
+              <p class="step__desc">오픈 후 한 달은 담당 매니저가 매일 함께 봐요.</p>
+              <span class="period">30일</span>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 8. 자주 묻는 질문 ============ -->
+    <section class="section faq" id="faq">
+      <div class="container faq__grid">
+        <div class="sec-head" data-reveal>
+          <h2 class="sec-title">자주 묻는 질문</h2>
+        </div>
+
+        <div class="accordion" data-reveal style="--d:.1s">
+          <div class="acc-item is-open">
+            <h3><button class="acc-q" type="button" aria-expanded="true" aria-controls="faq-1" id="faq-q1">직장을 다니면서도 운영할 수 있나요?<span class="acc-icon" aria-hidden="true"></span></button></h3>
+            <div class="acc-a" id="faq-1" role="region" aria-labelledby="faq-q1"><div><p>네, 가맹 1기 상담자의 절반 이상이 직장인이에요. 하루에 필요한 건 앱 알림 확인 정도예요.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button class="acc-q" type="button" aria-expanded="false" aria-controls="faq-2" id="faq-q2">매장에 직접 가야 하는 날도 있나요?<span class="acc-icon" aria-hidden="true"></span></button></h3>
+            <div class="acc-a" id="faq-2" role="region" aria-labelledby="faq-q2"><div><p>평소에는 없어요. 한 달에 한 번, 매니저와 함께 매장을 둘러보는 날을 권해요.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button class="acc-q" type="button" aria-expanded="false" aria-controls="faq-3" id="faq-q3">고장이 나면 제가 따로 기사님을 불러야 하나요?<span class="acc-icon" aria-hidden="true"></span></button></h3>
+            <div class="acc-a" id="faq-3" role="region" aria-labelledby="faq-q3"><div><p>아니요. 본사가 먼저 감지하고, 기사님 출동까지 저희가 처리해요. 점주님께는 결과만 알려드려요.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button class="acc-q" type="button" aria-expanded="false" aria-controls="faq-4" id="faq-q4">원하는 자리가 이미 있어요.<span class="acc-icon" aria-hidden="true"></span></button></h3>
+            <div class="acc-a" id="faq-4" role="region" aria-labelledby="faq-q4"><div><p>좋아요. 그 자리부터 같이 분석해 볼게요. 기준에 맞지 않으면 솔직하게 말씀드려요.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button class="acc-q" type="button" aria-expanded="false" aria-controls="faq-5" id="faq-q5">가맹 1기는 뭐가 다른가요?<span class="acc-icon" aria-hidden="true"></span></button></h3>
+            <div class="acc-a" id="faq-5" role="region" aria-labelledby="faq-q5"><div><p>첫 번째 점주님들의 의견이 본사 운영 방식에 그대로 반영돼요. 오픈 후 동행 기간도 더 길게 가져가요.</p></div></div>
+          </div>
+          <div class="acc-item">
+            <h3><button class="acc-q" type="button" aria-expanded="false" aria-controls="faq-6" id="faq-q6">상담만 받아도 괜찮나요?<span class="acc-icon" aria-hidden="true"></span></button></h3>
+            <div class="acc-a" id="faq-6" role="region" aria-labelledby="faq-q6"><div><p>물론이에요. 상담이 계약으로 이어져야 한다는 부담은 없어요.</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ 9. 가맹 상담 문의 ============ -->
+    <section class="section section--dark contact" id="contact">
+      <div class="container contact__grid">
+        <div class="contact__intro">
+          <div class="sec-head" data-reveal>
+            <h2 class="sec-title">빈 매장,<br><span class="hl">같이 켜 볼까요?</span></h2>
+            <p class="sec-sub">남겨 주시면 영업일 기준 하루 안에 담당자가 연락드릴게요.</p>
+          </div>
+          <figure class="ph ph--dark" style="--ratio:4/3" data-src="asset/img/contact-night-store.webp" data-reveal>
+            <figcaption class="ph__label"><b>contact-night-store.webp</b>늦은 밤, 거리에서 본 불 켜진 매장</figcaption>
+          </figure>
+        </div>
+
+        <div class="contact__form-wrap" data-reveal style="--d:.1s">
+          <form class="form" id="contactForm" novalidate>
+            <div class="field">
+              <label for="f-name">이름</label>
+              <input id="f-name" name="name" type="text" placeholder="성함을 알려주세요" autocomplete="name" required>
+              <p class="field__error" data-msg="이름을 입력해 주세요."></p>
+            </div>
+            <div class="field">
+              <label for="f-phone">연락처</label>
+              <input id="f-phone" name="phone" type="tel" inputmode="numeric" placeholder="010-0000-0000" autocomplete="tel" maxlength="13" required>
+              <p class="field__error" data-msg="연락처를 정확히 입력해 주세요."></p>
+            </div>
+            <div class="field">
+              <label for="f-region">희망 지역</label>
+              <input id="f-region" name="region" type="text" placeholder="예) 서울 마포구" required>
+              <p class="field__error" data-msg="희망 지역을 입력해 주세요."></p>
+            </div>
+            <div class="field">
+              <label for="f-msg">문의 내용 <span class="optional">(선택)</span></label>
+              <textarea id="f-msg" name="message" rows="4" placeholder="궁금한 점을 편하게 적어주세요"></textarea>
+            </div>
+            <button class="btn btn--block" type="submit">가맹 상담 문의
+              <svg class="btn__arrow" viewBox="0 0 40 20" aria-hidden="true"><path d="M2 11 C 12 9, 22 12, 34 10 M26 3 C 29 6, 32 8, 36 10 C 32 12, 29 14, 27 17"/></svg>
+            </button>
+          </form>
+
+          <div class="form-done" id="formDone" tabindex="-1" hidden>
+            <p>접수됐어요! 하루 안에 연락드릴게요.<br>그동안 매장은 저희가 보고 있을게요.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ Footer ============ -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <p class="logo">NOBODY COFFEE</p>
+      <p class="footer__contact">가맹 상담 1600-0000 · hello@nobodycoffee.kr</p>
+      <p class="footer__copy">© 2026 NOBODY COFFEE</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
