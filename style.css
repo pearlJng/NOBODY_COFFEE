@@ -63,8 +63,8 @@
   --gutter: clamp(1.25rem, 3.125vw, 4rem);    /* 기준 화면 1840px → 57px */
   --grid-gap: clamp(1rem, 2.6vw, 3rem);    /* 기준 화면 1840px → 약 48px */
   --section-y: clamp(5rem, 8vw, 7rem);   /* 모든 섹션 상하여백 — 이 값 하나만 사용 */
-  --header-h: 5rem;
-  --logo-w: 9.375rem;                         /* 헤더 로고 목표 폭 */
+  --header-h: 3.5rem;                      /* 기준 화면 56px */
+  --logo-w: 6.5rem;                        /* 헤더 로고 목표 폭 (높이 약 39px) */
   --line: 2px solid var(--ink);
 
   /* 손그림 물결 밑줄 (잉크 / 다크 섹션용 종이색) */
@@ -223,7 +223,7 @@ p { text-wrap: pretty; }
   transition: transform .2s var(--ease);
 }
 .btn:hover .btn__arrow { transform: translateX(0.25rem); }
-.btn--sm { height: 2.75rem; padding: 0 1.375rem; font-size: 1rem; }
+.btn--sm { height: 2.375rem; padding: 0 1.25rem; font-size: 1rem; }
 .btn--block { width: 100%; height: 4rem; }
 
 /* 스티커 · 칩 — 모두 테두리형(잉크 선 + 크림 배경), 살짝 회전 */
@@ -373,7 +373,7 @@ p { text-wrap: pretty; }
 .menu-btn {
   display: none;
   position: relative;
-  width: 2.75rem; height: 2.75rem;
+  width: 2.375rem; height: 2.375rem;
   padding: 0;
   border: var(--line);
   border-radius: 50%;
@@ -1308,7 +1308,7 @@ p { text-wrap: pretty; }
 /* ---------- 8. Responsive ---------- */
 
 @media (max-width: 1024px) {
-  :root { --header-h: 4.5rem; }
+  :root { --header-h: 3.25rem; }
 
   .nav { gap: 1.75rem; }
   .nav a { font-size: 0.9375rem; }
@@ -1417,7 +1417,7 @@ p { text-wrap: pretty; }
 
 /* 헤더 · 히어로 — 768px 이하 */
 @media (max-width: 768px) {
-  :root { --logo-w: 6.875rem; }
+  :root { --logo-w: 5.25rem; }
   .nav {
     position: fixed;
     top: var(--header-h);
@@ -1459,10 +1459,10 @@ p { text-wrap: pretty; }
 }
 
 @media (max-width: 640px) {
-  :root { --header-h: 4rem; --fs-title: clamp(1.875rem, 8.4vw, 2.25rem); }
+  :root { --header-h: 3rem; --fs-title: clamp(1.875rem, 8.4vw, 2.25rem); }
 
   .logo { font-size: 1.125rem; }
-  .btn--sm { height: 2.5rem; padding: 0 1rem; font-size: 0.9375rem; }
+  .btn.btn--sm { height: 2.25rem; padding: 0 0.875rem; font-size: 0.9375rem; }
   .menu-btn { width: 2.5rem; height: 2.5rem; }
 
   .btn { height: 3.5rem; font-size: 1.0625rem; }
