@@ -46,6 +46,7 @@
   --ink-soft: #5A5650;
   --ink-faint: #9A958C;
   --light: #FFC93C;
+  --bean: #3B1A0D;                         /* 로고 원두 브라운 — 로고 · 다크 섹션 형광펜 */
   --on-dark-soft: #BDB7AC;
 
   /* type */
@@ -174,6 +175,16 @@ p { text-wrap: pretty; }
 .section--dark .hl {
   background-position: 0 100%;
   background-size: 100% 0.14em;
+}
+
+/* 박스 형광펜 — 다크 섹션 타이틀 강조. 원두 브라운이 왼쪽에서 쓱 그어진다 */
+.mark {
+  white-space: nowrap;
+  margin: 0 0.06em;
+  padding: 0 0.2em;
+  background: linear-gradient(var(--bean), var(--bean)) no-repeat 0 55% / 100% 1.24em;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
 }
 
 /* 손그림 물결 밑줄 — 나머지 섹션 타이틀 강조 (잉크색) */
@@ -559,6 +570,32 @@ p { text-wrap: pretty; }
   line-height: 1.4;
 }
 .worry-card p { color: var(--ink-soft); }
+/* 카드 오른쪽 아래 일러스트 — 카드 밖으로 살짝 걸치게 */
+.worry-card__art {
+  position: absolute;
+  z-index: 1;
+  width: auto;
+  pointer-events: none;
+  transform-origin: 50% 100%;
+}
+.worry-card__art--grind  { right: 1.75rem;  bottom: -0.875rem; height: 10.5rem; }
+.worry-card__art--cup    { right: -0.25rem; bottom: -1.5rem;   height: 6.75rem; }
+.worry-card__art--frappe { right: 0.25rem;  bottom: -1rem;     height: 10.5rem; }
+.worry-card__art--drip   { right: 1rem;     bottom: -1.25rem;  height: 9.5rem; }
+/* hover: 카드가 들리면서 일러스트도 흔들 · 폴짝 */
+.worry-card:hover .worry-card__art.is-jiggle { animation: art-jiggle .7s var(--ease) both; }
+.worry-card:hover .worry-card__art.is-hop    { animation: art-hop .6s var(--ease-pop) both; }
+@keyframes art-jiggle {
+  0%, 100% { rotate: 0deg; }
+  20% { rotate: -9deg; }
+  45% { rotate: 7deg; }
+  70% { rotate: -4deg; }
+}
+@keyframes art-hop {
+  0%, 100% { translate: 0 0; rotate: 0deg; }
+  40% { translate: 0 -18%; rotate: -6deg; }
+  70% { translate: 0 0; rotate: 2deg; }
+}
 .worry__foot {
   display: flex;
   align-items: flex-start;
@@ -1265,6 +1302,17 @@ p { text-wrap: pretty; }
 .js [data-reveal="drop"] > :nth-child(2) { transition-delay: .14s; }
 .js [data-reveal="drop"] > :nth-child(3) { transition-delay: .28s; }
 .js [data-reveal="drop"] > :nth-child(4) { transition-delay: .42s; }
+/* 일러스트는 카드가 내려앉은 뒤 톡 튀어나온다 */
+.js [data-reveal="drop"] .worry-card__art {
+  opacity: 0;
+  transform: scale(.4);
+  transition: opacity .25s var(--ease), transform .6s var(--ease-pop);
+  transition-delay: .6s;
+}
+.js [data-reveal="drop"].is-in .worry-card__art { opacity: 1; transform: none; }
+.js [data-reveal="drop"] > :nth-child(2) .worry-card__art { transition-delay: .74s; }
+.js [data-reveal="drop"] > :nth-child(3) .worry-card__art { transition-delay: .88s; }
+.js [data-reveal="drop"] > :nth-child(4) .worry-card__art { transition-delay: 1.02s; }
 .worry-card:hover,
 .js [data-reveal="drop"].is-in > .worry-card:hover { transform: translateY(calc(var(--y, 0px) - 0.5rem)) rotate(0deg); }
 
@@ -1286,6 +1334,11 @@ p { text-wrap: pretty; }
   transition: clip-path .8s var(--ease) .35s;
 }
 .js .is-in .ul::after { clip-path: inset(0 0 0 0); }
+.js .mark {
+  background-size: 0% 1.24em;
+  transition: background-size .7s var(--ease) .35s;
+}
+.js .is-in .mark { background-size: 100% 1.24em; }
 
 .js .doodle path {
   stroke-dasharray: 1;
@@ -1360,6 +1413,10 @@ p { text-wrap: pretty; }
   .worry-card:nth-child(odd) { margin-right: 1.125rem; }
   .worry-card:nth-child(even) { margin-left: 1.125rem; }
   .worry-card__title { font-size: 1.375rem; margin-top: 1.25rem; }
+  /* 한 줄 카드: 글이 일러스트에 가리지 않게 오른쪽을 비워 둔다 */
+  .worry-card { padding-right: 6.5rem; }
+  .worry-card__art { right: 0.75rem; bottom: -0.5rem; height: 5.75rem; }
+  .worry-card__art--cup { right: 0.5rem; height: 4rem; }
   .worry__foot { margin-top: 3rem; font-size: 1.25rem; }
 
   .box-grid--2 { grid-template-columns: minmax(0, 1fr); }
@@ -1469,7 +1526,7 @@ p { text-wrap: pretty; }
   .btn { height: 3.5rem; font-size: 1.0625rem; }
   .note__text { font-size: 0.875rem; padding: 2px 0.625rem; }
 
-  .worry-card { padding: 1.5rem 1.375rem 1.75rem; }
+  .worry-card { padding: 1.5rem 6rem 1.75rem 1.375rem; }
   .worry-card:nth-child(odd) { margin-right: 0.625rem; }
   .worry-card:nth-child(even) { margin-left: 0.625rem; }
   .worry__foot { font-size: 1.125rem; }
