@@ -11,7 +11,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
-  <link rel="preload" as="image" href="asset/img/hero-empty-store.webp" type="image/webp">
+  <link rel="preload" as="image" href="asset/img/hero/hero-01.webp" type="image/webp">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -38,20 +38,21 @@
 
   <!-- 워드마크: 헤더와 같은 레이어의 fixed 요소. transform만으로 히어로 → 헤더 로고 자리로 이동 -->
   <a class="wordmark" id="wordmark" href="#hero" aria-label="NOBODY COFFEE 홈">
-      <svg class="wordmark__svg" viewBox="0 0 599 218" aria-hidden="true" focusable="false">
+      <svg class="wordmark__svg" viewBox="0 0 589 218" aria-hidden="true" focusable="false">
+        <!-- 글자 간격 6 (두 줄 폭을 589로 맞추려고 F·E 폭을 92.7로) -->
         <g class="wordmark__ink">
           <path transform="translate(0 0)" d="M0 100V0H30L66 58V0H92V100H62L26 42V100Z"/>
-          <circle class="wordmark__dot" cx="150" cy="50" r="50"/>
-          <path transform="translate(208 0)" d="M0 0H54A25 25 0 0 1 54 50A25 25 0 0 1 54 100H0ZM26 22H50A9 9 0 0 1 50 40H26ZM26 60H50A9 9 0 0 1 50 78H26Z"/>
-          <path transform="translate(295 0)" d="M0 50a50 50 0 1 0 100 0a50 50 0 1 0-100 0ZM26 50a24 24 0 1 1 48 0a24 24 0 1 1-48 0Z"/>
-          <path transform="translate(403 0)" d="M0 0H42A50 50 0 0 1 42 100H0ZM26 22H42A28 28 0 0 1 42 78H26Z"/>
-          <path transform="translate(503 0)" d="M0 0H30L48 34L66 0H96L61 58V100H35V58Z"/>
+          <circle class="wordmark__dot" cx="148" cy="50" r="50"/>
+          <path transform="translate(204 0)" d="M0 0H54A25 25 0 0 1 54 50A25 25 0 0 1 54 100H0ZM26 22H50A9 9 0 0 1 50 40H26ZM26 60H50A9 9 0 0 1 50 78H26Z"/>
+          <path transform="translate(289 0)" d="M0 50a50 50 0 1 0 100 0a50 50 0 1 0-100 0ZM26 50a24 24 0 1 1 48 0a24 24 0 1 1-48 0Z"/>
+          <path transform="translate(395 0)" d="M0 0H42A50 50 0 0 1 42 100H0ZM26 22H42A28 28 0 0 1 42 78H26Z"/>
+          <path transform="translate(493 0)" d="M0 0H30L48 34L66 0H96L61 58V100H35V58Z"/>
           <path transform="translate(0 118)" d="M88.3 17.9A50 50 0 1 0 88.3 82.1L68.4 65.4A24 24 0 1 1 68.4 34.6Z"/>
-          <path transform="translate(107 118)" d="M0 50a50 50 0 1 0 100 0a50 50 0 1 0-100 0ZM26 50a24 24 0 1 1 48 0a24 24 0 1 1-48 0Z"/>
-          <path transform="translate(225 118)" d="M0 0H80V22H26V40H70V62H26V100H0Z"/>
-          <path transform="translate(323 118)" d="M0 0H80V22H26V40H70V62H26V100H0Z"/>
-          <path transform="translate(421 118)" d="M0 0H80V22H26V39H72V61H26V78H80V100H0Z"/>
-          <path transform="translate(519 118)" d="M0 0H80V22H26V39H72V61H26V78H80V100H0Z"/>
+          <path transform="translate(94.3 118)" d="M0 50a50 50 0 1 0 100 0a50 50 0 1 0-100 0ZM26 50a24 24 0 1 1 48 0a24 24 0 1 1-48 0Z"/>
+          <path transform="translate(200.3 118)" d="M0 0H92.7V22H26V40H80V62H26V100H0Z"/>
+          <path transform="translate(299 118)" d="M0 0H92.7V22H26V40H80V62H26V100H0Z"/>
+          <path transform="translate(397.7 118)" d="M0 0H92.7V22H26V39H82V61H26V78H92.7V100H0Z"/>
+          <path transform="translate(496.3 118)" d="M0 0H92.7V22H26V39H82V61H26V78H92.7V100H0Z"/>
         </g>
       </svg>
   </a>
@@ -74,18 +75,16 @@
         </div>
 
         <div class="hero__media">
-          <!-- 약 3초마다 다음 사진이 왼쪽에서 오른쪽으로 펼쳐진다 (script.js 2-1) -->
+          <!-- 약 3초마다 다음 사진이 왼쪽에서 오른쪽으로 펼쳐진다 (script.js 히어로 슬라이드). --x: 잘릴 때 남길 가로 위치 -->
           <figure class="hero__photo" id="heroSlides">
-            <img class="hero__slide is-current is-intro" src="asset/img/hero-empty-store.webp" width="1200" height="1560" fetchpriority="high"
-                 alt="따뜻한 펜던트 조명이 켜진 채 아무도 없는 매장 부스 좌석">
-            <img class="hero__slide" src="asset/img/day-morning.webp" width="1400" height="1050" decoding="async"
-                 alt="아침 햇살이 드는 빈 매장 테이블">
-            <img class="hero__slide" src="asset/img/day-afternoon.webp" width="1400" height="1050" decoding="async"
-                 alt="창으로 빛이 들어오는 한낮의 매장 바">
-            <img class="hero__slide" src="asset/img/manager-machine.webp" width="1400" height="1600" decoding="async"
-                 alt="스스로 준비를 마친 커피 머신">
-            <img class="hero__slide" src="asset/img/contact-night-store.webp" width="1400" height="1050" decoding="async"
-                 alt="밤에도 불이 켜져 있는 매장 입구">
+            <img class="hero__slide is-current is-intro" src="asset/img/hero/hero-01.webp" width="1151" height="761" fetchpriority="high"
+                 style="--x:40%" alt="햇살이 드는 테이블 위 NOBODY COFFEE 머그잔">
+            <img class="hero__slide" src="asset/img/hero/hero-02.webp" width="1151" height="761" decoding="async"
+                 style="--x:72%" alt="커피 머신과 컵이 준비된 무인 매장 카운터">
+            <img class="hero__slide" src="asset/img/hero/hero-03.webp" width="1151" height="761" decoding="async"
+                 style="--x:90%" alt="NOBODY COFFEE 사인이 걸린 빈 부스 좌석">
+            <img class="hero__slide" src="asset/img/hero/hero-04.webp" width="1151" height="761" decoding="async"
+                 style="--x:50%" alt="오후 햇살이 드는 조용한 매장 벽면">
           </figure>
         </div>
       </div>

@@ -455,7 +455,7 @@ p { text-wrap: pretty; }
   gap: 2rem;
   padding-top: clamp(0.5rem, 1.4vw, 1.5rem);
 }
-.hero__wm-spacer { width: 80%; aspect-ratio: 599 / 218; }
+.hero__wm-spacer { width: 80%; aspect-ratio: 589 / 218; }
 .hero__chip {
   display: inline-block;
   margin-bottom: clamp(0.875rem, 1.4vw, 1.375rem);
@@ -508,7 +508,7 @@ p { text-wrap: pretty; }
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 40%;
+  object-position: var(--x, 50%) 50%;
   opacity: 0;
 }
 .hero__slide.is-current { z-index: 1; opacity: 1; }
