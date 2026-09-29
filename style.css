@@ -236,6 +236,14 @@ p { text-wrap: pretty; }
 .btn:hover .btn__arrow { transform: translateX(0.25rem); }
 .btn--sm { height: 2.375rem; padding: 0 1.25rem; font-size: 1rem; }
 .btn--block { width: 100%; height: 4rem; }
+/* 히어로 CTA — 원두 브라운 바탕 + 밝은 글자, 한 단계 작게 */
+.btn.btn--bean {
+  height: 3.25rem;
+  padding: 0 1.5rem;
+  background: var(--bean);
+  color: var(--paper);
+  font-size: 1.0625rem;
+}
 
 /* 스티커 · 칩 — 모두 테두리형(잉크 선 + 크림 배경), 살짝 회전 */
 .sticker,
@@ -1547,6 +1555,7 @@ p { text-wrap: pretty; }
   .menu-btn { width: 2.5rem; height: 2.5rem; }
 
   .btn { height: 3.5rem; font-size: 1.0625rem; }
+  .btn.btn--bean { height: 3.125rem; font-size: 1rem; }
   .note__text { font-size: 0.875rem; padding: 2px 0.625rem; }
 
   .worry-card { padding: 1.5rem 6rem 1.75rem 1.375rem; }
