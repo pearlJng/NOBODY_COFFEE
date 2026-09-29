@@ -178,6 +178,21 @@
     revealTargets.forEach(el => revealObserver.observe(el));
   }
 
+  // 박스 형광펜(.mark)은 타이틀이 화면 위쪽 2/3 안으로 들어왔을 때 그어서, 그어지는 모습이 눈에 띄게
+  const marks = document.querySelectorAll('.mark');
+  if (reduceMotion) {
+    marks.forEach(m => m.classList.add('is-drawn'));
+  } else {
+    const markObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('is-drawn');
+        markObserver.unobserve(entry.target);
+      });
+    }, { rootMargin: '0px 0px -35% 0px' });
+    marks.forEach(m => markObserver.observe(m));
+  }
+
   /* ---------- 4. 매장의 하루 ---------- */
   const day = document.getElementById('day');
   const dayList = day.querySelector('.day__list');

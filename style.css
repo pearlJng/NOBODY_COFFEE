@@ -540,10 +540,22 @@ p { text-wrap: pretty; }
 
 /* ---------- 5-2. 현실 공감 ---------- */
 
+.worry { position: relative; overflow: hidden; }
+.worry > .container { position: relative; }
+.worry__bean {
+  position: absolute;
+  top: -3.5rem;
+  right: 2rem;
+  width: auto;
+  height: 22rem;
+  fill: rgba(255, 251, 240, .05);
+  pointer-events: none;
+}
+
 .worry__cards {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
-  padding: 0.5rem 0.75rem 3.5rem;
+  padding: 0.5rem 0.75rem 5rem;             /* 아래로 걸친 일러스트 자리 */
 }
 .worry-card {
   position: relative;
@@ -551,7 +563,6 @@ p { text-wrap: pretty; }
   display: flex;
   flex-direction: column;
   min-height: 21.25rem;
-  margin-inline: -0.875rem;                        /* 이웃 카드와 살짝 겹치게 */
   padding: 2.25rem 2.5rem 2.5rem;
   border: var(--line);
   background: var(--paper);
@@ -559,10 +570,17 @@ p { text-wrap: pretty; }
   transform: translateY(var(--y, 0)) rotate(var(--r, 0deg));
   transition: transform .25s var(--ease);
 }
-.worry-card:nth-child(2) { z-index: 2; }
-.worry-card:nth-child(3) { z-index: 1; }
-.worry-card:nth-child(4) { z-index: 3; }
-.worry-card:hover { z-index: 5; }
+/* li는 층을 만들지 않아서(z-index·transform 없음) 일러스트가 이웃 카드 위로 올라올 수 있다 */
+.worry-item {
+  position: relative;
+  display: flex;
+  margin-inline: -0.875rem;                        /* 이웃 카드와 살짝 겹치게 */
+}
+.worry-item > .worry-card { flex: 1; }
+.worry-item:nth-child(2) .worry-card { z-index: 2; }
+.worry-item:nth-child(3) .worry-card { z-index: 1; }
+.worry-item:nth-child(4) .worry-card { z-index: 3; }
+.worry-item:hover .worry-card { z-index: 5; }
 .worry-card__title {
   margin: 1.75rem 0 0.875rem;
   font-size: 1.5rem;
@@ -570,21 +588,24 @@ p { text-wrap: pretty; }
   line-height: 1.4;
 }
 .worry-card p { color: var(--ink-soft); }
-/* 카드 오른쪽 아래 일러스트 — 카드 밖으로 살짝 걸치게 */
+/* 카드 오른쪽 아래 모서리에 걸치는 일러스트 — 아래·오른쪽으로 카드 밖에 튀어나오게 */
 .worry-card__art {
   position: absolute;
-  z-index: 1;
+  z-index: 6;                                      /* 모든 카드 위 */
   width: auto;
+  margin-bottom: calc(var(--y, 0px) * -1);         /* 카드의 세로 어긋남(--y)을 따라간다 */
   pointer-events: none;
   transform-origin: 50% 100%;
+  transition: translate .25s var(--ease);
 }
-.worry-card__art--grind  { right: 1.75rem;  bottom: -0.875rem; height: 10.5rem; }
-.worry-card__art--cup    { right: -0.25rem; bottom: -1.5rem;   height: 6.75rem; }
-.worry-card__art--frappe { right: 0.25rem;  bottom: -1rem;     height: 10.5rem; }
-.worry-card__art--drip   { right: 1rem;     bottom: -1.25rem;  height: 9.5rem; }
+.worry-item:hover .worry-card__art { translate: 0 -0.5rem; }
+.worry-card__art--grind  { right: -1rem;    bottom: -2.75rem; height: 10.5rem; }
+.worry-card__art--cup    { right: -2rem;    bottom: -2.25rem; height: 6.75rem; }
+.worry-card__art--frappe { right: -1.5rem;  bottom: -2.75rem; height: 10.5rem; }
+.worry-card__art--drip   { right: -1.75rem; bottom: -2.75rem; height: 9.5rem; }
 /* hover: 카드가 들리면서 일러스트도 흔들 · 폴짝 */
-.worry-card:hover .worry-card__art.is-jiggle { animation: art-jiggle .7s var(--ease) both; }
-.worry-card:hover .worry-card__art.is-hop    { animation: art-hop .6s var(--ease-pop) both; }
+.worry-item:hover .worry-card__art.is-jiggle { animation: art-jiggle .7s var(--ease) both; }
+.worry-item:hover .worry-card__art.is-hop    { animation: art-hop .6s var(--ease-pop) both; }
 @keyframes art-jiggle {
   0%, 100% { rotate: 0deg; }
   20% { rotate: -9deg; }
@@ -592,9 +613,10 @@ p { text-wrap: pretty; }
   70% { rotate: -4deg; }
 }
 @keyframes art-hop {
-  0%, 100% { translate: 0 0; rotate: 0deg; }
-  40% { translate: 0 -18%; rotate: -6deg; }
-  70% { translate: 0 0; rotate: 2deg; }
+  0% { translate: 0 0; rotate: 0deg; }
+  40% { translate: 0 calc(-0.5rem - 18%); rotate: -6deg; }
+  70% { translate: 0 -0.5rem; rotate: 2deg; }
+  100% { translate: 0 -0.5rem; rotate: 0deg; }
 }
 .worry__foot {
   display: flex;
@@ -1293,15 +1315,15 @@ p { text-wrap: pretty; }
 .js [data-reveal="stagger"] > :nth-child(4) { transition-delay: .24s; }
 
 /* 걱정 카드 — 테이블 위로 던져지듯 */
-.js [data-reveal="drop"] > .worry-card {
+.js [data-reveal="drop"] > .worry-item > .worry-card {
   opacity: 0;
   transform: translateY(calc(var(--y, 0px) - 7.5rem)) rotate(calc(var(--r) - 12deg));
   transition: opacity .3s var(--ease), transform .75s var(--ease-pop);
 }
-.js [data-reveal="drop"].is-in > .worry-card { opacity: 1; transform: translateY(var(--y, 0px)) rotate(var(--r)); }
-.js [data-reveal="drop"] > :nth-child(2) { transition-delay: .14s; }
-.js [data-reveal="drop"] > :nth-child(3) { transition-delay: .28s; }
-.js [data-reveal="drop"] > :nth-child(4) { transition-delay: .42s; }
+.js [data-reveal="drop"].is-in > .worry-item > .worry-card { opacity: 1; transform: translateY(var(--y, 0px)) rotate(var(--r)); }
+.js [data-reveal="drop"] > :nth-child(2) > .worry-card { transition-delay: .14s; }
+.js [data-reveal="drop"] > :nth-child(3) > .worry-card { transition-delay: .28s; }
+.js [data-reveal="drop"] > :nth-child(4) > .worry-card { transition-delay: .42s; }
 /* 일러스트는 카드가 내려앉은 뒤 톡 튀어나온다 */
 .js [data-reveal="drop"] .worry-card__art {
   opacity: 0;
@@ -1313,12 +1335,14 @@ p { text-wrap: pretty; }
 .js [data-reveal="drop"] > :nth-child(2) .worry-card__art { transition-delay: .74s; }
 .js [data-reveal="drop"] > :nth-child(3) .worry-card__art { transition-delay: .88s; }
 .js [data-reveal="drop"] > :nth-child(4) .worry-card__art { transition-delay: 1.02s; }
-.worry-card:hover,
-.js [data-reveal="drop"].is-in > .worry-card:hover { transform: translateY(calc(var(--y, 0px) - 0.5rem)) rotate(0deg); }
+.worry-item:hover > .worry-card,
+.js [data-reveal="drop"].is-in > .worry-item:hover > .worry-card { transform: translateY(calc(var(--y, 0px) - 0.5rem)) rotate(0deg); }
 
 /* 등장 후 hover 반응에 지연이 남지 않도록 */
 .js .is-settled,
-.js .is-settled > * { transition-delay: 0s !important; }
+.js .is-settled > *,
+.js .is-settled .worry-card,
+.js .is-settled .worry-card__art { transition-delay: 0s !important; }
 
 /* 형광펜 · 물결 밑줄 · 낙서가 그려지듯 */
 .js .hl {
@@ -1334,11 +1358,12 @@ p { text-wrap: pretty; }
   transition: clip-path .8s var(--ease) .35s;
 }
 .js .is-in .ul::after { clip-path: inset(0 0 0 0); }
+/* 형광펜: 타이틀이 화면 위쪽으로 올라왔을 때 따로 그어진다 (script.js 3) */
 .js .mark {
   background-size: 0% 1.24em;
-  transition: background-size .7s var(--ease) .35s;
+  transition: background-size .9s cubic-bezier(.65, 0, .35, 1) .15s;
 }
-.js .is-in .mark { background-size: 100% 1.24em; }
+.js .mark.is-drawn { background-size: 100% 1.24em; }
 
 .js .doodle path {
   stroke-dasharray: 1;
@@ -1368,9 +1393,9 @@ p { text-wrap: pretty; }
   .nav a { font-size: 0.9375rem; }
 
   .worry__cards { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 0.5rem; padding-inline: 1.5rem; }
-  .worry-card { margin-inline: -0.625rem; }
-  .worry-card:nth-child(odd) { --y: 0px !important; }
-  .worry-card:nth-child(even) { --y: 2.5rem !important; }
+  .worry-item { margin-inline: -0.625rem; }
+  .worry-item:nth-child(odd) { --y: 0px !important; }
+  .worry-item:nth-child(even) { --y: 2.5rem !important; }
 
   .manager__layout { grid-template-columns: minmax(0, 1fr); gap: calc(var(--grid-gap) * 1.5); }
   .manager__media { position: relative; top: 0; order: -1; max-width: 72%; margin-left: auto; }
@@ -1408,15 +1433,17 @@ p { text-wrap: pretty; }
 
 
   .worry__cards { grid-template-columns: minmax(0, 1fr); padding: 0 0.5rem 1rem; row-gap: 0; }
-  .worry-card { min-height: 0; margin: 0 0 -0.75rem; padding: 1.75rem 1.75rem 2rem; }
-  .worry-card:nth-child(n) { --y: 0px !important; }
-  .worry-card:nth-child(odd) { margin-right: 1.125rem; }
-  .worry-card:nth-child(even) { margin-left: 1.125rem; }
+  .worry-item { margin: 0 0 -0.75rem; }
+  .worry-card { min-height: 0; padding: 1.75rem 1.75rem 2rem; }
+  .worry-item:nth-child(n) { --y: 0px !important; }
+  .worry-item:nth-child(odd) { margin-right: 1.125rem; }
+  .worry-item:nth-child(even) { margin-left: 1.125rem; }
   .worry-card__title { font-size: 1.375rem; margin-top: 1.25rem; }
   /* 한 줄 카드: 글이 일러스트에 가리지 않게 오른쪽을 비워 둔다 */
   .worry-card { padding-right: 6.5rem; }
-  .worry-card__art { right: 0.75rem; bottom: -0.5rem; height: 5.75rem; }
-  .worry-card__art--cup { right: 0.5rem; height: 4rem; }
+  .worry-card__art { right: -0.5rem; bottom: -1rem; height: 5.75rem; }
+  .worry-card__art--cup { right: -0.75rem; bottom: -0.75rem; height: 4rem; }
+  .worry__bean { top: -2rem; right: -1.5rem; height: 12rem; }
   .worry__foot { margin-top: 3rem; font-size: 1.25rem; }
 
   .box-grid--2 { grid-template-columns: minmax(0, 1fr); }
@@ -1527,8 +1554,8 @@ p { text-wrap: pretty; }
   .note__text { font-size: 0.875rem; padding: 2px 0.625rem; }
 
   .worry-card { padding: 1.5rem 6rem 1.75rem 1.375rem; }
-  .worry-card:nth-child(odd) { margin-right: 0.625rem; }
-  .worry-card:nth-child(even) { margin-left: 0.625rem; }
+  .worry-item:nth-child(odd) { margin-right: 0.625rem; }
+  .worry-item:nth-child(even) { margin-left: 0.625rem; }
   .worry__foot { font-size: 1.125rem; }
   .doodle--curl { width: 3.25rem; height: 2.5rem; }
 
