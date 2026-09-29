@@ -542,15 +542,6 @@ p { text-wrap: pretty; }
 
 .worry { position: relative; overflow: hidden; }
 .worry > .container { position: relative; }
-.worry__bean {
-  position: absolute;
-  top: -3.5rem;
-  right: 2rem;
-  width: auto;
-  height: 22rem;
-  fill: rgba(255, 251, 240, .05);
-  pointer-events: none;
-}
 
 .worry__cards {
   display: grid;
@@ -577,10 +568,16 @@ p { text-wrap: pretty; }
   margin-inline: -0.875rem;                        /* 이웃 카드와 살짝 겹치게 */
 }
 .worry-item > .worry-card { flex: 1; }
-.worry-item:nth-child(2) .worry-card { z-index: 2; }
-.worry-item:nth-child(3) .worry-card { z-index: 1; }
-.worry-item:nth-child(4) .worry-card { z-index: 3; }
-.worry-item:hover .worry-card { z-index: 5; }
+.worry-card { box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, .35); }
+/* 쌓임 순서: 카드 1 < 2 > 3 < 4. 일러스트는 자기 카드 바로 위, 다음 카드 아래 → 살짝 가려져 입체감 */
+.worry-item:nth-child(1) { --z: 10; }
+.worry-item:nth-child(2) { --z: 30; }
+.worry-item:nth-child(3) { --z: 20; }
+.worry-item:nth-child(4) { --z: 40; }
+.worry-item .worry-card { z-index: var(--z); }
+.worry-item .worry-card__art { z-index: calc(var(--z) + 5); }
+.worry-item:hover .worry-card { z-index: 50; box-shadow: 0 1.25rem 2.5rem rgba(0, 0, 0, .45); }
+.worry-item:hover .worry-card__art { z-index: 55; }
 .worry-card__title {
   margin: 1.75rem 0 0.875rem;
   font-size: 1.5rem;
@@ -588,21 +585,21 @@ p { text-wrap: pretty; }
   line-height: 1.4;
 }
 .worry-card p { color: var(--ink-soft); }
-/* 카드 오른쪽 아래 모서리에 걸치는 일러스트 — 아래·오른쪽으로 카드 밖에 튀어나오게 */
+/* 카드 오른쪽 아래에 걸치는 일러스트 — 아래로 살짝 튀어나오고, 옆 카드에 조금 가린다 */
 .worry-card__art {
   position: absolute;
-  z-index: 6;                                      /* 모든 카드 위 */
   width: auto;
   margin-bottom: calc(var(--y, 0px) * -1);         /* 카드의 세로 어긋남(--y)을 따라간다 */
   pointer-events: none;
   transform-origin: 50% 100%;
+  filter: drop-shadow(0 0.375rem 0.5rem rgba(0, 0, 0, .3));
   transition: translate .25s var(--ease);
 }
 .worry-item:hover .worry-card__art { translate: 0 -0.5rem; }
-.worry-card__art--grind  { right: -1rem;    bottom: -2.75rem; height: 10.5rem; }
-.worry-card__art--cup    { right: -2rem;    bottom: -2.25rem; height: 6.75rem; }
-.worry-card__art--frappe { right: -1.5rem;  bottom: -2.75rem; height: 10.5rem; }
-.worry-card__art--drip   { right: -1.75rem; bottom: -2.75rem; height: 9.5rem; }
+.worry-card__art--grind  { right: 1.75rem;  bottom: -1.5rem;  height: 10rem; }
+.worry-card__art--cup    { right: 0.75rem;  bottom: -1.5rem;  height: 6.25rem; }
+.worry-card__art--frappe { right: 1.5rem;   bottom: -1rem;    height: 10.5rem; }
+.worry-card__art--drip   { right: 1.5rem;   bottom: -1.25rem; height: 9.25rem; }
 /* hover: 카드가 들리면서 일러스트도 흔들 · 폴짝 */
 .worry-item:hover .worry-card__art.is-jiggle { animation: art-jiggle .7s var(--ease) both; }
 .worry-item:hover .worry-card__art.is-hop    { animation: art-hop .6s var(--ease-pop) both; }
@@ -1443,7 +1440,6 @@ p { text-wrap: pretty; }
   .worry-card { padding-right: 6.5rem; }
   .worry-card__art { right: -0.5rem; bottom: -1rem; height: 5.75rem; }
   .worry-card__art--cup { right: -0.75rem; bottom: -0.75rem; height: 4rem; }
-  .worry__bean { top: -2rem; right: -1.5rem; height: 12rem; }
   .worry__foot { margin-top: 3rem; font-size: 1.25rem; }
 
   .box-grid--2 { grid-template-columns: minmax(0, 1fr); }
