@@ -421,8 +421,9 @@ p { text-wrap: pretty; }
 .wordmark.is-docking { transition: transform .35s var(--ease); }
 .wordmark:focus-visible { outline: 3px solid var(--ink); outline-offset: 0.375rem; }
 .wordmark__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.wordmark__ink { fill: #57301E; fill-rule: evenodd; }   /* 로고 전용 브라운 */
+.wordmark__ink { fill: var(--ink); fill-rule: evenodd; }
 .wordmark__bean {
+  fill: #3B1A0D;                                  /* 원두만 다크 브라운 */
   transform-box: fill-box;
   transform-origin: center;
   animation: bean-in 1s var(--ease-pop) .3s both;
