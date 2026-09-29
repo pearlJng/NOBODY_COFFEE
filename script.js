@@ -1,7 +1,7 @@
 /* =========================================================
    NOBODY COFFEE — interactions
    1. 모바일 메뉴 열기 · 닫기
-   2. 워드마크 → 헤더 로고 이동 · 현재 메뉴 표시
+   2. 워드마크 → 헤더 로고 이동 · 히어로 슬라이드 · 현재 메뉴 표시
    3. 스크롤 리빌 · 카운트업
    4. 매장의 하루 타임라인
    5. 가맹 절차 연결선
@@ -92,6 +92,26 @@
     if (nav.classList.contains('is-open')) setMenu(false);
     window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   });
+
+  /* ---------- 히어로 슬라이드 ---------- */
+  // 약 3초마다 다음 사진을 현재 사진 위에 올려 왼쪽 → 오른쪽으로 펼친다
+  const heroSlides = [...document.querySelectorAll('.hero__slide')];
+  let slideIndex = 0;
+
+  const nextSlide = () => {
+    const next = heroSlides[(slideIndex + 1) % heroSlides.length];
+    if (document.hidden || !next.complete) return;   // 탭이 가려졌거나 사진이 아직 안 왔으면 다음 차례로
+    const cur = heroSlides[slideIndex];
+    slideIndex = heroSlides.indexOf(next);
+    cur.classList.remove('is-current', 'is-intro');
+    cur.classList.add('is-prev');
+    next.classList.add('is-entering');
+    next.addEventListener('animationend', () => {
+      next.classList.replace('is-entering', 'is-current');
+      cur.classList.remove('is-prev');
+    }, { once: true });
+  };
+  if (heroSlides.length > 1) setInterval(nextSlide, 3000);
 
   /* ---------- 현재 메뉴 ---------- */
 

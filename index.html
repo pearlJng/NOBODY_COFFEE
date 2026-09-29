@@ -74,9 +74,18 @@
         </div>
 
         <div class="hero__media">
-          <figure class="hero__photo">
-            <img src="asset/img/hero-empty-store.webp" width="1200" height="1560" fetchpriority="high"
+          <!-- 약 3초마다 다음 사진이 왼쪽에서 오른쪽으로 펼쳐진다 (script.js 2-1) -->
+          <figure class="hero__photo" id="heroSlides">
+            <img class="hero__slide is-current is-intro" src="asset/img/hero-empty-store.webp" width="1200" height="1560" fetchpriority="high"
                  alt="따뜻한 펜던트 조명이 켜진 채 아무도 없는 매장 부스 좌석">
+            <img class="hero__slide" src="asset/img/day-morning.webp" width="1400" height="1050" decoding="async"
+                 alt="아침 햇살이 드는 빈 매장 테이블">
+            <img class="hero__slide" src="asset/img/day-afternoon.webp" width="1400" height="1050" decoding="async"
+                 alt="창으로 빛이 들어오는 한낮의 매장 바">
+            <img class="hero__slide" src="asset/img/manager-machine.webp" width="1400" height="1600" decoding="async"
+                 alt="스스로 준비를 마친 커피 머신">
+            <img class="hero__slide" src="asset/img/contact-night-store.webp" width="1400" height="1050" decoding="async"
+                 alt="밤에도 불이 켜져 있는 매장 입구">
           </figure>
         </div>
       </div>
@@ -96,17 +105,17 @@
             <h3 class="worry-card__title">새벽 2시에 머신이 멈추면요?</h3>
             <p>문 닫을 사람도, 고칠 사람도 없는 시간이죠.</p>
           </li>
-          <li class="worry-card" style="--r:3deg; --y:48px">
+          <li class="worry-card" style="--r:3deg; --y:3rem">
             <span class="num-chip" style="--rot:4deg">걱정 <b>02</b></span>
             <h3 class="worry-card__title">청소는 결국 제가 해야 하죠?</h3>
             <p>무인이라더니, 퇴근길마다 매장에 들르게 됩니다.</p>
           </li>
-          <li class="worry-card" style="--r:-2deg; --y:12px">
+          <li class="worry-card" style="--r:-2deg; --y:0.75rem">
             <span class="num-chip" style="--rot:-2deg">걱정 <b>03</b></span>
             <h3 class="worry-card__title">커피 한 잔에 다섯 시간 앉아 계시면요?</h3>
             <p>자리는 꽉 찼는데, 매출은 그대로예요.</p>
           </li>
-          <li class="worry-card" style="--r:6deg; --y:56px">
+          <li class="worry-card" style="--r:6deg; --y:3.5rem">
             <span class="num-chip" style="--rot:3deg">걱정 <b>04</b></span>
             <h3 class="worry-card__title">광고만큼 벌 수 있을까요?</h3>
             <p>“월 순수익 보장”이라는 말, 믿어도 될까요?</p>
