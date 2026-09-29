@@ -421,18 +421,16 @@ p { text-wrap: pretty; }
 .wordmark.is-docking { transition: transform .35s var(--ease); }
 .wordmark:focus-visible { outline: 3px solid var(--ink); outline-offset: 0.375rem; }
 .wordmark__svg { display: block; width: 100%; height: auto; overflow: visible; }
-.wordmark__ink { fill: currentColor; fill-rule: evenodd; }
-.wordmark__dot {
-  fill: var(--light);
+.wordmark__ink { fill: #57301E; fill-rule: evenodd; }   /* 로고 전용 브라운 */
+.wordmark__bean {
   transform-box: fill-box;
   transform-origin: center;
-  animation: dot-on 1.8s var(--ease) .3s both;
+  animation: bean-in 1s var(--ease-pop) .3s both;
 }
-/* 처음 로드할 때 한 번, 불이 은은하게 켜지듯 */
-@keyframes dot-on {
-  0%   { fill: var(--paper-deep); filter: drop-shadow(0 0 0 rgba(255, 201, 60, 0)); }
-  45%  { fill: var(--light); filter: drop-shadow(0 0 1.375rem rgba(255, 201, 60, .85)); }
-  100% { fill: var(--light); filter: drop-shadow(0 0 0 rgba(255, 201, 60, 0)); }
+/* 처음 로드할 때 한 번, 원두가 톡 떨어지듯 */
+@keyframes bean-in {
+  from { opacity: 0; transform: translateY(-18%) rotate(-24deg) scale(.6); }
+  to { opacity: 1; transform: none; }
 }
 
 .hero {
@@ -455,7 +453,7 @@ p { text-wrap: pretty; }
   gap: 2rem;
   padding-top: clamp(0.5rem, 1.4vw, 1.5rem);
 }
-.hero__wm-spacer { width: 80%; aspect-ratio: 589 / 218; }
+.hero__wm-spacer { width: 80%; aspect-ratio: 1023 / 381; }
 .hero__chip {
   display: inline-block;
   margin-bottom: clamp(0.875rem, 1.4vw, 1.375rem);
