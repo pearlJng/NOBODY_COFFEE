@@ -1,7 +1,7 @@
 /* =========================================================
    NOBODY COFFEE — interactions
-   1. 이미지 플레이스홀더 → 실제 이미지 자동 교체
-   2. 헤더 스크롤 상태 · 현재 메뉴 표시
+   1. 모바일 메뉴 열기 · 닫기
+   2. 워드마크 → 헤더 로고 이동 · 현재 메뉴 표시
    3. 스크롤 리빌 · 카운트업
    4. 매장의 하루 타임라인
    5. 가맹 절차 연결선
@@ -14,23 +14,86 @@
   const clamp = (v, min = 0, max = 1) => Math.min(max, Math.max(min, v));
   const easeOut = t => 1 - Math.pow(1 - t, 3);
 
-  /* ---------- 1. 플레이스홀더 → 이미지 ---------- */
-  // asset/img/ 에 data-src 와 같은 이름의 파일이 있으면 회색 박스 대신 표시
-  document.querySelectorAll('.ph[data-src]').forEach(ph => {
-    const label = ph.querySelector('.ph__label');
-    const img = new Image();
-    img.decoding = 'async';
-    img.alt = label ? label.textContent.replace(label.querySelector('b')?.textContent || '', '').trim() : '';
-    img.onload = () => {
-      ph.prepend(img);
-      ph.classList.add('has-img');
+  /* ---------- 1. 모바일 메뉴 ---------- */
+  const header = document.getElementById('header');
+  const nav = document.getElementById('nav');
+  const menuBtn = document.getElementById('menuBtn');
+
+  const setMenu = open => {
+    nav.classList.toggle('is-open', open);
+    header.classList.toggle('is-open', open);
+    menuBtn.setAttribute('aria-expanded', String(open));
+    menuBtn.setAttribute('aria-label', open ? '메뉴 닫기' : '메뉴 열기');
+    // 메뉴가 열리면 워드마크를 헤더 로고 자리로 붙여 메뉴 패널과 겹치지 않게
+    wordmark.classList.add('is-docking');
+    updateHeader();
+    clearTimeout(dockTimer);
+    dockTimer = setTimeout(() => wordmark.classList.remove('is-docking'), 400);
+  };
+  let dockTimer = null;
+  menuBtn.addEventListener('click', () => setMenu(menuBtn.getAttribute('aria-expanded') !== 'true'));
+  nav.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && nav.classList.contains('is-open')) { setMenu(false); menuBtn.focus(); }
+  });
+  document.addEventListener('click', e => {
+    if (nav.classList.contains('is-open') && !header.contains(e.target)) setMenu(false);
+  });
+  window.matchMedia('(min-width: 769px)').addEventListener('change', e => { if (e.matches) setMenu(false); });
+
+  /* ---------- 2. 워드마크 → 헤더 로고 ---------- */
+  // 히어로의 큰 워드마크(fixed)가 스크롤 양에 비례해 줄어들며 헤더 로고 자리로 이동한다.
+  // 위치·크기는 transform 으로만 바꾸고, 시작·목표 값은 resize 때만 다시 잰다.
+  const wordmark = document.getElementById('wordmark');
+  const wmSpacer = document.getElementById('wmSpacer');
+  const logoSlot = document.getElementById('logoSlot');
+  // 스무스 스크롤 라이브러리(Lenis)를 붙이면 그 스크롤 값을 기준으로 계산
+  const getScroll = () => (window.lenis ? window.lenis.scroll : window.scrollY);
+  let wm = null;
+
+  const measureWordmark = () => {
+    const y = getScroll();
+    const sp = wmSpacer.getBoundingClientRect();
+    const slot = logoSlot.getBoundingClientRect();
+    const headerH = header.offsetHeight;
+    const scaleEnd = slot.width / sp.width;
+    wordmark.style.setProperty('--wm-w', `${sp.width}px`);
+    wm = {
+      startX: sp.left,
+      startY: sp.top + y,                              // 스크롤 0일 때 히어로 속 위치
+      endX: slot.left,                                 // 헤더 좌측 패딩
+      endY: (headerH - sp.height * scaleEnd) / 2,      // 헤더 세로 중앙
+      scaleEnd,
+      distance: Math.max(sp.height, 120),              // D ≈ 워드마크 높이
+      leaveAt: Math.max(1, sp.top + y - headerH),      // 워드마크가 헤더에 닿는 시점(메뉴와 겹치기 전에 전환)
     };
-    img.src = ph.dataset.src;
+  };
+
+  const updateHeader = () => {
+    if (!wm) return;
+    const y = getScroll();
+    const docked = nav.classList.contains('is-open');
+    let p;
+    if (reduceMotion) p = docked || y >= wm.leaveAt ? 1 : 0;
+    else p = docked ? 1 : clamp(y / wm.distance);
+
+    const e = reduceMotion ? p : easeOut(p);
+    const s = 1 + (wm.scaleEnd - 1) * e;
+    const x = wm.startX + (wm.endX - wm.startX) * e;
+    // 모션 줄이기: 애니메이션 없이 페이지와 함께 올라가다가, 히어로를 벗어나면 헤더 로고로 바뀜
+    const ty = reduceMotion && p === 0 ? wm.startY - y : wm.startY + (wm.endY - wm.startY) * e;
+
+    wordmark.style.transform = `translate3d(${x.toFixed(2)}px, ${ty.toFixed(2)}px, 0) scale(${s.toFixed(4)})`;
+    header.classList.toggle('is-scrolled', reduceMotion ? p === 1 : p > 0.6);
+  };
+
+  wordmark.addEventListener('click', e => {
+    e.preventDefault();
+    if (nav.classList.contains('is-open')) setMenu(false);
+    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
   });
 
-  /* ---------- 2. 헤더 · 현재 메뉴 ---------- */
-  const header = document.getElementById('header');
-  const updateHeader = () => header.classList.toggle('is-scrolled', window.scrollY > 40);
+  /* ---------- 현재 메뉴 ---------- */
 
   const navLinks = [...document.querySelectorAll('.nav a')];
   const navTargets = navLinks.map(a => document.querySelector(a.getAttribute('href')));
@@ -222,14 +285,16 @@
       ticking = false;
     });
   };
-  const onResize = () => { layoutDayTrack(); onScroll(); };
+  const onResize = () => { measureWordmark(); layoutDayTrack(); onScroll(); };
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
   window.addEventListener('load', onResize);
   if (document.fonts) document.fonts.ready.then(onResize);
+  measureWordmark();
   layoutDayTrack();
   updateHeader();
+  wordmark.classList.add('is-ready');
   updateDay();
   updateSteps();
 
