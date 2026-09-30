@@ -605,121 +605,84 @@ p { text-wrap: pretty; }
 
 /* ---------- 5-3. 보이지 않는 점장 ---------- */
 
-.manager__head { text-align: center; }
-.manager__head .sec-title,
-.manager__head .sec-sub { margin-inline: auto; }
+/* 제목 · 캐릭터 · 지표를 한 장의 포스터 폭 안에 묶는다 */
+.manager__inner { max-width: 82rem; margin-inline: auto; }
+.manager__lead { font-size: 0.72em; color: var(--ink-soft); }
+.manager__head .sec-sub { font-weight: 400; }
 
-/* 좌 2 | 실루엣 | 우 2 — 두 행을 같은 높이로 나눠 항목을 세로 중앙에 균등 배치 */
+/* 왼쪽 캐릭터 | 오른쪽 지표 2×2 — 선 없이 수평 정렬과 여백으로만 한 그룹이 된다 */
 .mgr-grid {
-  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr) minmax(0, 1fr);
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas: "l1 fig r1" "l2 fig r2";
-  column-gap: var(--grid-gap);
-  row-gap: 4rem;
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);   /* 캐릭터 약 38% */
+  align-items: center;
+  column-gap: clamp(3rem, 7vw, 8rem);
 }
-.mgr-item { align-self: center; }
-.mgr-item--l { justify-self: end; text-align: right; }
-.mgr-item--r { justify-self: start; text-align: left; }
-.mgr-item__stat strong {
-  display: block;
+
+.mgr-fig { position: relative; }
+.mgr-fig img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
+/* 바닥 그림자 — 종이 위에 놓인 느낌만 */
+.mgr-fig::after {
+  content: "";
+  position: absolute;
+  left: 6%;
+  right: 6%;
+  bottom: -1.25rem;
+  height: 2.5rem;
+  border-radius: 50%;
+  background: radial-gradient(closest-side, rgba(59, 26, 13, .16), rgba(59, 26, 13, 0));
+}
+
+.mgr-stats {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  column-gap: clamp(2rem, 4vw, 4rem);
+  row-gap: clamp(3rem, 6vw, 5.5rem);
+}
+.mgr-stat { display: flex; flex-direction: column; align-items: flex-start; }
+.mgr-stat__no {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--ink-faint);
+}
+.mgr-stat__no::before {
+  content: "";
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--light);
+}
+.mgr-stat strong {
+  margin-top: 0.875rem;
   font-family: 'Jalnan2', 'yg-jalnan', var(--font-display);
-  font-size: clamp(2.5rem, 3.6vw, 4rem);
+  font-size: clamp(2.25rem, 3.8vw, 4rem);
   font-weight: normal;
   line-height: 1.1;
+  color: var(--ink);
   white-space: nowrap;
 }
-.mgr-item__stat span {
-  display: block;
-  margin-top: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.875rem;
-  font-weight: 700;
+.mgr-stat__name {
+  margin-top: 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
   line-height: 1.4;
-  letter-spacing: 0.02em;
-  word-spacing: -0.35em;                     /* Space Mono의 넓은 공백 보정 */
-}
-.mgr-item__name { margin-top: 1rem; font-size: 1.375rem; font-weight: 700; line-height: 1.4; }
-.mgr-item__desc {
-  max-width: 22em;
-  margin-top: 0.5rem;
   color: var(--ink-soft);
-  font-size: var(--fs-body);
-  line-height: 1.7;
 }
-.mgr-item--l .mgr-item__desc { margin-left: auto; }
 
-/* 가운데 점장: 칸 폭의 80%, 높이는 좌우 항목 전체 높이에 맞춘다 */
-.mgr-fig { grid-area: fig; position: relative; min-height: 20rem; }
-.mgr-fig__svg {
-  position: absolute;
-  inset: 0;
-  width: 80%;
-  height: 100%;
-  margin: auto;
-  overflow: visible;
-}
-.mgr-fig__line path {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 3px;
-  stroke-dasharray: 8 8;
-  stroke-linecap: round;
-  vector-effect: non-scaling-stroke;
-}
-.mgr-fig__reveal { fill: none; stroke: #fff; stroke-width: 14; stroke-dasharray: 1; stroke-dashoffset: 0; }
-.mgr-fig__head { fill: var(--light); transform-box: fill-box; transform-origin: center; }
-
-/* 실루엣 → 네 항목 연결선 (1024px 초과에서만) */
-.mgr-links {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  overflow: visible;
-  pointer-events: none;
-}
-.mgr-link {
-  fill: none;
-  stroke: var(--ink);
-  stroke-width: 1.5px;
-  stroke-dasharray: 4 6;
-  stroke-linecap: round;
-}
-.mgr-link__reveal { fill: none; stroke: #fff; stroke-width: 6; stroke-dasharray: 1; stroke-dashoffset: 0; }
-
-/* 진입 모션: 실루엣 그리기(0.8s) → 노란 원 켜짐 → 연결선 → 항목이 좌우에서 0.1s 간격 */
-.js .mgr-fig__reveal { stroke-dashoffset: 1; transition: stroke-dashoffset .8s var(--ease); }
-.js .mgr-grid.is-in .mgr-fig__reveal { stroke-dashoffset: 0; }
-.js .mgr-fig__head { opacity: 0; transform: scale(.4); }
-.js .mgr-grid.is-in .mgr-fig__head { animation: mgr-head-on .9s var(--ease-pop) .8s both; }
-@keyframes mgr-head-on {
-  0%   { opacity: 0; transform: scale(.4); filter: drop-shadow(0 0 0 rgba(255, 201, 60, 0)); }
-  50%  { opacity: 1; transform: scale(1.06); filter: drop-shadow(0 0 1.25rem rgba(255, 201, 60, .9)); }
-  100% { opacity: 1; transform: none; filter: drop-shadow(0 0 0 rgba(255, 201, 60, 0)); }
-}
-.js .mgr-link__reveal { stroke-dashoffset: 1; transition: stroke-dashoffset .6s var(--ease) 1.1s; }
-.js .mgr-grid.is-in .mgr-link__reveal { stroke-dashoffset: 0; }
-.js .mgr-item {
+/* 진입 모션: 캐릭터가 먼저 올라오고, 지표가 0.1s 간격으로 따라온다 */
+.js .mgr-fig { opacity: 0; translate: 0 1.5rem; transition: opacity .7s var(--ease), translate .8s var(--ease); }
+.js .mgr-grid.is-in .mgr-fig { opacity: 1; translate: 0 0; }
+.js .mgr-stat {
   opacity: 0;
+  translate: 0 .75rem;
   transition: opacity .5s var(--ease), translate .6s var(--ease);
-  transition-delay: calc(1.5s + var(--i, 0) * .1s);
+  transition-delay: calc(.6s + var(--i, 0) * .1s);
 }
-.js .mgr-item--l { translate: -1.5rem 0; }
-.js .mgr-item--r { translate: 1.5rem 0; }
-.js .mgr-grid.is-in .mgr-item { opacity: 1; translate: 0 0; }
-
-.manager__foot {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.75rem;
-  margin-top: 3rem;
-  font-size: 1.25rem;
-  font-weight: 700;
-}
-.doodle--down { width: 1.75rem; height: 2.625rem; flex: none; }
+.js .mgr-grid.is-in .mgr-stat { opacity: 1; translate: 0 0; }
 
 /* ---------- 5-4. 매장의 하루 ---------- */
 
@@ -1419,17 +1382,6 @@ p { text-wrap: pretty; }
   .worry-item:nth-child(odd) { --y: 0px !important; }
   .worry-item:nth-child(even) { --y: 2.5rem !important; }
 
-  /* 점장: 실루엣을 위에 작게, 항목은 2×2. 연결선 숨김 */
-  .mgr-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-rows: auto;
-    grid-template-areas: "fig fig" "l1 r1" "l2 r2";
-    row-gap: 3rem;
-  }
-  .mgr-fig { min-height: 0; }
-  .mgr-fig__svg { position: static; display: block; width: min(50%, 15rem); height: auto; }
-  .mgr-links { display: none; }
-  .mgr-item { align-self: start; }
 
   .day__grid { gap: var(--grid-gap); }
   .day__main { padding-left: 3.25rem; }
@@ -1525,6 +1477,15 @@ p { text-wrap: pretty; }
 }
 
 /* 헤더 · 히어로 — 768px 이하 */
+/* 점장 — 좁은 화면에선 캐릭터를 위에, 지표 2×2는 그 아래 */
+@media (max-width: 760px) {
+  .mgr-grid { grid-template-columns: minmax(0, 1fr); row-gap: 3.5rem; }
+  .mgr-fig { width: min(70%, 18rem); }
+  .mgr-stats { column-gap: 1rem; row-gap: 2.5rem; }
+  .mgr-stat strong { font-size: clamp(1.75rem, 7vw, 2.25rem); }
+  .mgr-stat__name { font-size: 1rem; }
+}
+
 @media (max-width: 768px) {
   :root { --logo-w: 5.25rem; }
   .nav {
@@ -1583,11 +1544,6 @@ p { text-wrap: pretty; }
   .worry__foot { font-size: 1.125rem; }
   .doodle--curl { width: 3.25rem; height: 2.5rem; }
 
-  .manager__foot { justify-content: flex-start; font-size: 1.125rem; }
-  /* 점장: 1열, 모두 왼쪽 정렬 */
-  .mgr-grid { grid-template-columns: minmax(0, 1fr); grid-template-areas: "fig" "l1" "l2" "r1" "r2"; row-gap: 2.5rem; }
-  .mgr-item--l, .mgr-item--r { justify-self: start; text-align: left; }
-  .mgr-item--l .mgr-item__desc { margin-left: 0; }
 
   .day__clock { font-size: 2.5rem; }
   .day__photos { width: 7rem; }

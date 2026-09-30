@@ -113,58 +113,6 @@
   };
   if (heroSlides.length > 1) setInterval(nextSlide, 3000);
 
-  /* ---------- 점장 연결선 ---------- */
-  // 실루엣 가장자리 네 점에서 각 항목 쪽으로 점선을 긋는다. 항목 쪽 끝은 텍스트에서 16px 앞에서 멈춘다.
-  const mgrGrid = document.getElementById('mgrGrid');
-  const mgrFig = document.getElementById('mgrFig');
-  const mgrLinks = document.getElementById('mgrLinks');
-  const mgrItems = [...mgrGrid.querySelectorAll('.mgr-item')];
-  // 실루엣 viewBox(280×300) 기준 시작점: 어깨·몸통 바깥쪽에서 조금 떨어진 곳
-  const mgrAnchors = [[24, 178], [6, 256], [256, 178], [274, 256]];
-  const SVG_NS = 'http://www.w3.org/2000/svg';
-
-  const drawMgrLinks = () => {
-    if (getComputedStyle(mgrLinks).display === 'none') return;
-    const box = mgrGrid.getBoundingClientRect();
-    const ctm = mgrFig.getScreenCTM();
-    if (!ctm) return;
-    mgrLinks.setAttribute('viewBox', `0 0 ${box.width} ${box.height}`);
-    // 선은 처음 한 번만 만들고 이후엔 좌표만 바꾼다 (다시 만들면 진입 모션이 건너뛰어짐)
-    if (!mgrLinks.childElementCount) {
-      mgrItems.forEach((_, i) => {
-        const mask = document.createElementNS(SVG_NS, 'mask');
-        mask.id = `mgrLinkMask${i}`;
-        mask.setAttribute('maskUnits', 'userSpaceOnUse');
-        const reveal = document.createElementNS(SVG_NS, 'path');
-        reveal.setAttribute('class', 'mgr-link__reveal');
-        reveal.setAttribute('pathLength', '1');
-        mask.append(reveal);
-        const line = document.createElementNS(SVG_NS, 'path');
-        line.setAttribute('class', 'mgr-link');
-        line.setAttribute('mask', `url(#${mask.id})`);
-        mgrLinks.append(mask, line);
-      });
-    }
-    const masks = mgrLinks.querySelectorAll('mask');
-    const lines = mgrLinks.querySelectorAll('.mgr-link');
-    mgrItems.forEach((item, i) => {
-      const r = item.getBoundingClientRect();
-      const isLeft = item.classList.contains('mgr-item--l');
-      const pt = new DOMPoint(mgrAnchors[i][0], mgrAnchors[i][1]).matrixTransform(ctm);
-      const x1 = pt.x - box.left, y1 = pt.y - box.top;
-      const x2 = (isLeft ? r.right + 16 : r.left - 16) - box.left;
-      const y2 = r.top + r.height / 2 - box.top;
-      const d = `M${x1.toFixed(1)} ${y1.toFixed(1)} L${x2.toFixed(1)} ${y2.toFixed(1)}`;
-      Object.entries({ x: 0, y: 0, width: box.width, height: box.height }).forEach(([k, v]) => masks[i].setAttribute(k, v));
-      masks[i].firstChild.setAttribute('d', d);
-      lines[i].setAttribute('d', d);
-    });
-  };
-  window.addEventListener('resize', drawMgrLinks);
-  window.addEventListener('load', drawMgrLinks);
-  if (document.fonts) document.fonts.ready.then(drawMgrLinks);
-  drawMgrLinks();
-
   /* ---------- 현재 메뉴 ---------- */
 
   const navLinks = [...document.querySelectorAll('.nav a')];
