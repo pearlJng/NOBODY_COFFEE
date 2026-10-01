@@ -67,6 +67,12 @@
   --header-h: 3.5rem;                      /* 기준 화면 56px */
   --logo-w: 6.5rem;                        /* 헤더 로고 목표 폭 (높이 약 39px) */
   --line: 2px solid var(--ink);
+  /* 모서리 — 바깥 패널일수록 크게. 안쪽 요소는 '바깥 r − 안쪽 여백'으로 줄여 곡선이 겹쳐 보이게(동심원 보정) */
+  --r-xs: 0.375rem;                        /* 작은 태그 · 테이프 · 패널 속 사진 */
+  --r-sm: 0.75rem;                         /* 입력칸 · 작은 카드 */
+  --r-md: 1rem;                            /* 카드 */
+  --r-lg: 1.25rem;                         /* 패널 */
+  --r-xl: 1.5rem;                          /* 말풍선 · 큰 사진 */
 
   /* 손그림 물결 밑줄 (잉크 / 다크 섹션용 종이색) */
   --wave-ink: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 12' preserveAspectRatio='none'%3E%3Cpath d='M0 6 C 5 1, 15 1, 20 6 S 35 11, 40 6' fill='none' stroke='%231B1B1B' stroke-width='2.5' stroke-linecap='round'/%3E%3C/svg%3E");
@@ -182,6 +188,7 @@ p { text-wrap: pretty; }
   white-space: nowrap;
   margin: 0 0.06em;
   padding: 0 0.2em;
+  border-radius: 0.2em;
   background: linear-gradient(var(--bean), var(--bean)) no-repeat 0 55% / 100% 1.24em;
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
@@ -297,6 +304,7 @@ p { text-wrap: pretty; }
   position: relative;
   overflow: hidden;
   border: var(--line);
+  border-radius: var(--r-lg);
   background: var(--paper-deep);
 }
 .ph > img {
@@ -488,7 +496,7 @@ p { text-wrap: pretty; }
   inset: 0;
   overflow: hidden;
   border: var(--line);
-  border-radius: 0;
+  border-radius: var(--r-xl);
   background: var(--paper-deep);
 }
 /* 슬라이드: 모두 겹쳐 두고, 새 사진이 위로 올라와 왼쪽 → 오른쪽으로 펼쳐진다 */
@@ -538,6 +546,7 @@ p { text-wrap: pretty; }
   min-height: 15rem;
   padding: 1.5rem 2rem 1.75rem;
   border: var(--line);
+  border-radius: var(--r-md);
   background: var(--paper);
   color: var(--ink);
   transform: translateY(var(--y, 0)) rotate(var(--r, 0deg));
@@ -662,7 +671,7 @@ p { text-wrap: pretty; }
   min-width: 0;
   padding: clamp(1.125rem, 1.8vw, 1.625rem) clamp(1.25rem, 2vw, 1.875rem);
   border: var(--line);
-  border-radius: 1.5rem;
+  border-radius: var(--r-xl);
   background: var(--paper);
 }
 .mgr-stat::after {
@@ -849,7 +858,7 @@ p { text-wrap: pretty; }
   min-height: 0;
   padding: clamp(1rem, 1.8vw, 1.75rem);
   border: var(--line);
-  border-radius: 1.25rem;
+  border-radius: var(--r-lg);
 }
 .day-panel--hq { background: var(--ink); color: var(--paper); }
 .day-panel--owner { background: var(--paper); box-shadow: 0.375rem 0.375rem 0 var(--ink); }
@@ -895,7 +904,7 @@ p { text-wrap: pretty; }
   position: relative;
   flex: 1;
   min-height: 0;
-  border-radius: 0.75rem;
+  border-radius: var(--r-xs);
   overflow: hidden;
 }
 .day-panel--hq .day-panel__view { background: #2A2A2A; }
@@ -903,6 +912,8 @@ p { text-wrap: pretty; }
   position: absolute;
   inset: 0;
   margin: 0;
+  border: 0;
+  border-radius: 0;
   opacity: 0;
   transition: opacity .6s var(--ease);
 }
@@ -913,7 +924,7 @@ p { text-wrap: pretty; }
   left: 0.75rem;
   top: 0.625rem;
   padding: 2px 0.5rem;
-  border-radius: 0.375rem;
+  border-radius: var(--r-xs);
   background: rgba(27, 27, 27, .66);
   color: var(--paper);
   font-family: var(--font-mono);
@@ -1023,7 +1034,7 @@ p { text-wrap: pretty; }
   .day-tick { font-size: 0.6875rem; }
   .day-tick::after { width: 0.75rem; height: 0.75rem; }
   .day__split { gap: 0.625rem; }
-  .day-panel { padding: 0.75rem; border-radius: 1rem; }
+  .day-panel { padding: 0.75rem; border-radius: var(--r-md); }
   .day-panel--owner { box-shadow: 0.25rem 0.25rem 0 var(--ink); }
   .day-panel__head { margin-bottom: 0.625rem; }
   .day-panel__who { padding: 2px 0.5rem; font-size: 0.75rem; }
@@ -1032,7 +1043,7 @@ p { text-wrap: pretty; }
   .day-step__text { font-size: 0.9375rem; }
   .day-step__status { font-size: 0.75rem; }
   .day-step__spent { font-size: 0.8125rem; }
-  .day__counter { flex-direction: column; align-items: flex-start; gap: 0.125rem; padding: 0.5rem 0.75rem; border-radius: 0.75rem; }
+  .day__counter { flex-direction: column; align-items: flex-start; gap: 0.125rem; padding: 0.5rem 0.75rem; border-radius: var(--r-sm); }
   .day__counter-label { font-size: 0.75rem; }
   .day__counter-value { min-width: 0; font-size: 1.125rem; text-align: left; }
 }
@@ -1066,7 +1077,7 @@ p { text-wrap: pretty; }
   gap: 1.25rem;
   padding: clamp(1.25rem, 2.2vw, 2.25rem);
   border: var(--line);
-  border-radius: 1.25rem;
+  border-radius: var(--r-lg);
   background: var(--ink);
   color: var(--paper);
 }
@@ -1118,7 +1129,7 @@ p { text-wrap: pretty; }
   column-gap: 1.5rem;
   padding: clamp(1rem, 1.5vw, 1.375rem) clamp(1.25rem, 2vw, 1.75rem);
   border: var(--line);
-  border-radius: 1rem;
+  border-radius: var(--r-md);
   background: var(--paper);
 }
 .rec-stat__num {
@@ -1149,15 +1160,15 @@ p { text-wrap: pretty; }
   .record { padding-block: 1.25rem; }
   .record__inner { gap: 1rem; }
   .record__body { grid-template-columns: minmax(0, 1fr); gap: 0.625rem; }
-  .rec-hero { gap: 0.375rem; padding: 1rem 1.125rem; border-radius: 1rem; }
+  .rec-hero { gap: 0.375rem; padding: 1rem 1.125rem; border-radius: var(--r-md); }
   .rec-hero__label { font-size: 0.75rem; padding: 2px 0.625rem; }
   .rec-hero__num { margin: 0.28em 0 0.12em 0.4em; font-size: clamp(2.75rem, 13vw, 3.5rem); }
   .rec-hero__desc { font-size: 0.8125rem; }
   .rec-hero__desc br { display: none; }
   .rec-stats { grid-template-rows: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
-  .rec-stat { display: flex; flex-direction: column; padding: 0.75rem 0.625rem; border-radius: 0.75rem; }
+  .rec-stat { display: flex; flex-direction: column; padding: 0.75rem 0.625rem; border-radius: var(--r-sm); }
   .rec-stat__num { font-size: clamp(1.25rem, 5.6vw, 1.5rem); }
-  .rec-stat__label { align-self: flex-start; margin-top: 0.5rem; padding: 1px 0.375rem; border-radius: 0.375rem; font-size: 0.6875rem; line-height: 1.4; word-break: keep-all; }
+  .rec-stat__label { align-self: flex-start; margin-top: 0.5rem; padding: 1px 0.375rem; border-radius: var(--r-xs); font-size: 0.6875rem; line-height: 1.4; word-break: keep-all; }
   .rec-stat__desc { display: none; }
 }
 
@@ -1176,12 +1187,13 @@ p { text-wrap: pretty; }
   max-width: clamp(17.5rem, 26vw, 30rem);
   padding: 1rem 1rem 4rem;
   border: var(--line);
+  border-radius: var(--r-md);
   background: var(--paper);
   box-shadow: 0.5rem 0.5rem 0 var(--ink);
   transform: rotate(var(--rot));
   transition: transform .3s var(--ease-pop);
 }
-.polaroid .ph { aspect-ratio: 1 / 1; }
+.polaroid .ph { aspect-ratio: 1 / 1; border-radius: var(--r-xs); }   /* 바깥 r(1rem) − 여백(1rem) → 최소값 */
 .polaroid__tape {
   position: absolute;
   top: -1.125rem;
@@ -1191,6 +1203,7 @@ p { text-wrap: pretty; }
   height: 2.125rem;
   margin-left: -3.5rem;
   border: var(--line);
+  border-radius: var(--r-xs);
   background: var(--paper-deep);
   transform: rotate(5deg);
 }
@@ -1272,25 +1285,34 @@ p { text-wrap: pretty; }
   transform: rotate(-45deg);
 }
 
+/* 11곳 — '직영점 기록'의 가동률 패널과 같은 어두운 둥근 패널. 기울기 · 겹친 종이 · 동그라미 없이 숫자로만 */
 .profit__proof {
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
-  padding: 2.5rem 2.25rem 2.25rem;
+  align-self: start;
+  padding: clamp(1.5rem, 2.4vw, 2.25rem);
   border: var(--line);
+  border-radius: var(--r-lg);
   background: var(--ink);
   color: var(--paper);
-  box-shadow: 0.5rem 0.5rem 0 var(--paper-deep), 0.5rem 0.5rem 0 2px var(--ink);
-  transform: rotate(var(--rot, 2deg));
+}
+.proof__chip {
+  align-self: flex-start;
+  padding: 3px 0.875rem;
+  border: 2px solid var(--paper);
+  border-radius: 999px;
+  font-size: var(--fs-label);
+  font-weight: 700;
+  line-height: 1.4;
 }
 .proof__num {
-  position: relative;
-  align-self: flex-start;
+  margin-top: 1.25rem;
   color: var(--light);
   font-family: var(--font-display);
-  font-size: clamp(6rem, 9vw, 8rem);
+  font-size: clamp(5rem, 8vw, 7rem);
   font-weight: 700;
   line-height: 1;
+  letter-spacing: -0.02em;
 }
 .proof__num small {
   margin-left: 0.25rem;
@@ -1298,11 +1320,19 @@ p { text-wrap: pretty; }
   font-family: var(--font-body);
   font-size: 0.3em;
   font-weight: 800;
+  letter-spacing: 0;
 }
-.proof__num .doodle--ring { left: -20%; width: 142%; aspect-ratio: 1.45 / 1; }
-.proof__num .doodle path { stroke: var(--paper); }
-.proof__label { margin-top: 1.75rem; font-size: 1.1875rem; font-weight: 700; line-height: 1.5; }
-.proof__desc { margin-top: 1.5rem; padding-top: 1.25rem; border-top: 2px solid var(--paper); color: var(--on-dark-soft); }
+.proof__label { margin-top: 0.875rem; font-size: 1.1875rem; font-weight: 700; line-height: 1.5; }
+/* 대표 한마디 — 안쪽 작은 카드. 바깥 r에서 여백만큼 줄인 r */
+.proof__desc {
+  margin-top: 1.5rem;
+  padding: 0.875rem 1rem;
+  border-radius: var(--r-sm);
+  background: rgba(255, 251, 240, .08);
+  color: var(--on-dark-soft);
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
 
 /* ---------- 5-7. 가맹 절차 ---------- */
 
@@ -1368,7 +1398,7 @@ p { text-wrap: pretty; }
   margin: 2rem 0 0 0.5rem;
   transform: rotate(8deg);
 }
-.accordion { border: var(--line); background: var(--paper); }
+.accordion { border: var(--line); border-radius: var(--r-lg); background: var(--paper); overflow: hidden; }
 .acc-item + .acc-item { border-top: var(--line); }
 .acc-item h3 { margin: 0; font-size: inherit; }
 .acc-q {
@@ -1450,7 +1480,7 @@ p { text-wrap: pretty; }
   width: 100%;
   padding: 1rem 1.125rem;
   border: 2px solid var(--paper);
-  border-radius: 0;
+  border-radius: var(--r-sm);
   background: transparent;
   color: var(--paper);
   font-size: var(--fs-body);
@@ -1479,6 +1509,7 @@ p { text-wrap: pretty; }
 .form-done {
   padding: 3.5rem 3rem;
   border: 2px solid var(--paper);
+  border-radius: var(--r-lg);
   box-shadow: 0.375rem 0.375rem 0 var(--paper);
 }
 .form-done:focus { outline: none; }
@@ -1697,7 +1728,7 @@ p { text-wrap: pretty; }
   }
   .mgr-fig { width: min(42%, calc((100svh - var(--header-h) - 30rem) * 0.778), 12rem); min-width: 6.5rem; justify-self: center; margin-bottom: 0.75rem; }
   .mgr-fig::after { display: none; }
-  .mgr-stat { padding: 0.75rem 0.75rem 0.625rem; border-radius: 1rem; }
+  .mgr-stat { padding: 0.75rem 0.75rem 0.625rem; border-radius: var(--r-md); }
   .mgr-stat--tl, .mgr-stat--bl, .mgr-stat--tr, .mgr-stat--br { width: 100%; translate: none; align-self: stretch; justify-self: stretch; transform-origin: 50% 0; }
   .mgr-stat::after { display: none; }
   .mgr-stat--tl::after, .mgr-stat--tr::after {
