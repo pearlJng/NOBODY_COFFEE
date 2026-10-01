@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
   <link rel="preload" as="image" href="asset/img/hero/hero-01.webp" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=20261001-11">
+  <link rel="stylesheet" href="style.css?v=20261001-12">
 </head>
 <body>
 
@@ -258,7 +258,7 @@
     </section>
 
     <!-- ============ 5. 직영점 기록 ============ -->
-    <!-- 한 화면 안에: 좌 어두운 패널(가동률) | 우 지표 3개 + 대표의 한마디 카드 -->
+    <!-- 한 화면 안에: 좌 어두운 패널(가동률) | 우 지표 3개 -->
     <section class="section section--deep record" id="record">
       <div class="container record__inner">
         <div class="sec-head record__head" data-reveal>
@@ -276,8 +276,7 @@
             <p class="rec-hero__desc">1년에 멈춘 시간, <br>다 합쳐도 하루가 조금 넘어요.</p>
           </article>
 
-          <div class="record__side">
-            <ul class="rec-stats" data-reveal="stagger">
+          <ul class="rec-stats" data-reveal="stagger">
               <li class="rec-stat">
                 <p class="rec-stat__num"><span data-count="1">1</span><small>시간</small> <span data-count="48">48</span><small>분</small></p>
                 <p class="rec-stat__label">고장 출동 평균</p>
@@ -294,17 +293,25 @@
                 <p class="rec-stat__desc">깨끗하고 멈추지 않는 매장에는 다시 오더라고요.</p>
               </li>
             </ul>
+        </div>
+      </div>
+    </section>
 
-            <figure class="rec-founder" data-reveal style="--d:.15s">
-              <div class="rec-founder__photo">
-                <img src="asset/img/founder.webp" width="900" height="900" loading="lazy" alt="매장 카운터 안쪽에서 커피 머신을 다루는 창업자의 뒷모습">
-              </div>
-              <blockquote class="rec-founder__quote">
-                <p>무인카페를 2년 하면서 제일 무서웠던 건 새벽 2시의 전화였어요. 그 전화를 점주님 대신 저희가 받으려고 본사를 만들었습니다.</p>
-                <footer>NOBODY COFFEE 대표 ○○○</footer>
-              </blockquote>
+    <!-- ============ 5-1. 대표의 한마디 ============ -->
+    <section class="section section--deep founder-sec" id="founder">
+      <div class="container">
+        <div class="founder">
+          <div class="polaroid" data-reveal="pop">
+            <span class="polaroid__tape" aria-hidden="true"></span>
+            <figure class="ph">
+              <img src="asset/img/founder.webp" width="900" height="900" loading="lazy"
+                   alt="매장 카운터 안쪽에서 커피 머신을 다루는 창업자의 뒷모습">
             </figure>
           </div>
+          <blockquote class="founder__quote" data-reveal style="--d:.15s">
+            <p>무인카페를 2년 하면서 제일 무서웠던 건 새벽 2시의 전화였어요. 그 전화를 점주님 대신 저희가 받으려고 본사를 만들었습니다.</p>
+            <footer>NOBODY COFFEE 대표 ○○○</footer>
+          </blockquote>
         </div>
       </div>
     </section>
@@ -494,6 +501,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261001-11"></script>
+  <script src="script.js?v=20261001-12"></script>
 </body>
 </html>
