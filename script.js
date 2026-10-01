@@ -204,7 +204,6 @@
   const dayFill = document.getElementById('dayFill');
   const dayClock = document.getElementById('dayClock');
   const dayPhotos = [...day.querySelectorAll('.day-panel--hq .ph')];
-  const dayEnd = document.getElementById('dayEnd');
   const counterValue = document.getElementById('dayCounterValue');
   const stepCount = dayTicks.length;
 
@@ -288,7 +287,7 @@
     const index = Math.min(stepCount - 1, Math.floor(progress * stepCount));
     if (index !== activeIndex) setActiveStep(index);
 
-    setFinal(dayEnd.getBoundingClientRect().top < window.innerHeight * 0.8);
+    setFinal(progress >= 1);   // 하루 끝까지 내려오면 누적 시간을 "약 6분"으로 마무리
   };
 
   /* ---------- 5. 가맹 절차 연결선 ---------- */
