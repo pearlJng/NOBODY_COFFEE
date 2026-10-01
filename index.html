@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
   <link rel="preload" as="image" href="asset/img/hero/hero-01.webp" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=20261001-10">
+  <link rel="stylesheet" href="style.css?v=20261001-11">
 </head>
 <body>
 
@@ -258,63 +258,53 @@
     </section>
 
     <!-- ============ 5. 직영점 기록 ============ -->
+    <!-- 한 화면 안에: 좌 어두운 패널(가동률) | 우 지표 3개 + 대표의 한마디 카드 -->
     <section class="section section--deep record" id="record">
-      <div class="container">
-        <div class="sec-head" data-reveal>
-          <h2 class="sec-title">말보다 <span class="ul">14개월의 기록</span>을<br>보여드릴게요.</h2>
+      <div class="container record__inner">
+        <div class="sec-head record__head" data-reveal>
+          <h2 class="sec-title">말보다 <span class="mark mark--light">14개월의 기록</span>을 보여드릴게요.</h2>
           <p class="sec-sub">직영점 3곳(성수 · 망원 · 분당 정자)을 직접 운영하며 쌓은 숫자예요.</p>
         </div>
 
-        <ul class="box-grid record__stats" data-reveal="stagger">
-          <li class="metric metric--hero">
-            <p class="metric__label">머신 가동률</p>
-            <p class="metric__num">
+        <div class="record__body">
+          <article class="rec-hero" data-reveal>
+            <p class="rec-hero__label">머신 가동률</p>
+            <p class="rec-hero__num">
               <span data-count="99.2" data-decimals="1">99.2</span><small>%</small>
               <svg class="doodle doodle--ring" viewBox="0 0 220 110" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M128 10 C 70 4, 12 22, 10 56 C 8 92, 70 104, 120 102 C 176 100, 212 82, 210 52 C 208 22, 160 6, 102 12"/></svg>
             </p>
-            <p class="metric__desc">1년에 멈춘 시간, 다 합쳐도 하루가 조금 넘어요.</p>
-          </li>
-          <li class="metric">
-            <p class="metric__num">
-              <span data-count="1">1</span><small>시간</small> <span data-count="48">48</span><small>분</small>
-            </p>
-            <div>
-              <p class="metric__label">고장 출동 평균</p>
-              <p class="metric__desc">새벽 접수 건 포함한 평균이에요.</p>
-            </div>
-          </li>
-          <li class="metric">
-            <p class="metric__num">
-              <span data-count="83">83</span><small>%</small>
-            </p>
-            <div>
-              <p class="metric__label">점주 연락 전 선조치</p>
-              <p class="metric__desc">대부분의 문제는 점주님이 모르는 사이에 끝나요.</p>
-            </div>
-          </li>
-          <li class="metric">
-            <p class="metric__num">
-              <span data-count="61">61</span><small>%</small>
-            </p>
-            <div>
-              <p class="metric__label">재방문 고객 비율</p>
-              <p class="metric__desc">깨끗하고 멈추지 않는 매장에는 다시 오더라고요.</p>
-            </div>
-          </li>
-        </ul>
+            <p class="rec-hero__desc">1년에 멈춘 시간, <br>다 합쳐도 하루가 조금 넘어요.</p>
+          </article>
 
-        <div class="founder">
-          <div class="polaroid" data-reveal="pop">
-            <span class="polaroid__tape" aria-hidden="true"></span>
-            <figure class="ph">
-              <img src="asset/img/founder.webp" width="900" height="900" loading="lazy"
-                   alt="매장 카운터 안쪽에서 커피 머신을 다루는 창업자의 뒷모습">
+          <div class="record__side">
+            <ul class="rec-stats" data-reveal="stagger">
+              <li class="rec-stat">
+                <p class="rec-stat__num"><span data-count="1">1</span><small>시간</small> <span data-count="48">48</span><small>분</small></p>
+                <p class="rec-stat__label">고장 출동 평균</p>
+                <p class="rec-stat__desc">새벽 접수 건 포함한 평균이에요.</p>
+              </li>
+              <li class="rec-stat">
+                <p class="rec-stat__num"><span data-count="83">83</span><small>%</small></p>
+                <p class="rec-stat__label">점주 연락 전 선조치</p>
+                <p class="rec-stat__desc">대부분의 문제는 점주님이 모르는 사이에 끝나요.</p>
+              </li>
+              <li class="rec-stat">
+                <p class="rec-stat__num"><span data-count="61">61</span><small>%</small></p>
+                <p class="rec-stat__label">재방문 고객 비율</p>
+                <p class="rec-stat__desc">깨끗하고 멈추지 않는 매장에는 다시 오더라고요.</p>
+              </li>
+            </ul>
+
+            <figure class="rec-founder" data-reveal style="--d:.15s">
+              <div class="rec-founder__photo">
+                <img src="asset/img/founder.webp" width="900" height="900" loading="lazy" alt="매장 카운터 안쪽에서 커피 머신을 다루는 창업자의 뒷모습">
+              </div>
+              <blockquote class="rec-founder__quote">
+                <p>무인카페를 2년 하면서 제일 무서웠던 건 새벽 2시의 전화였어요. 그 전화를 점주님 대신 저희가 받으려고 본사를 만들었습니다.</p>
+                <footer>NOBODY COFFEE 대표 ○○○</footer>
+              </blockquote>
             </figure>
           </div>
-          <blockquote class="founder__quote" data-reveal style="--d:.15s">
-            <p>무인카페를 2년 하면서 제일 무서웠던 건 새벽 2시의 전화였어요. 그 전화를 점주님 대신 저희가 받으려고 본사를 만들었습니다.</p>
-            <footer>NOBODY COFFEE 대표 ○○○</footer>
-          </blockquote>
         </div>
       </div>
     </section>
@@ -504,6 +494,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261001-10"></script>
+  <script src="script.js?v=20261001-11"></script>
 </body>
 </html>
