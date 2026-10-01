@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
   <link rel="preload" as="image" href="asset/img/hero/hero-01.webp" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=20260929-3">
+  <link rel="stylesheet" href="style.css?v=20261001-1">
 </head>
 <body>
 
@@ -141,12 +141,12 @@
     </section>
 
     <!-- ============ 3. 보이지 않는 점장 ============ -->
-    <!-- 왼쪽 점장 캐릭터 + 오른쪽 4개 지표(2×2). 선·박스·설명 없이 배경 위에 바로 놓는다 -->
+    <!-- 가운데 점장 캐릭터 + 양옆 4개 지표 말풍선(꼬리가 캐릭터를 향한다) -->
     <section class="section manager" id="manager">
       <div class="container">
         <div class="manager__inner">
           <div class="sec-head manager__head" data-reveal>
-            <h2 class="sec-title"><span class="manager__lead">그래서,</span><br><span class="ul">보이지 않는 점장</span>을 두었습니다.</h2>
+            <h2 class="sec-title"><span class="manager__lead">그래서,</span><br><span class="mark mark--light">보이지 않는 점장</span>을 두었습니다.</h2>
             <p class="sec-sub">매장에는 아무도 없지만,<br>본사에서는 24시간 누군가 보고 있어요.</p>
           </div>
 
@@ -155,10 +155,10 @@
               <img src="asset/img/manager-character.png" width="700" height="900" alt="태블릿으로 매장을 확인하는 NOBODY COFFEE 점장 캐릭터" loading="lazy">
             </figure>
             <ul class="mgr-stats" role="list">
-              <li class="mgr-stat" style="--i:0"><span class="mgr-stat__no">01</span><strong>24시간</strong><span class="mgr-stat__name">원격 관제</span></li>
-              <li class="mgr-stat" style="--i:1"><span class="mgr-stat__no">02</span><strong>1시간 48분</strong><span class="mgr-stat__name">출동 A/S</span></li>
-              <li class="mgr-stat" style="--i:2"><span class="mgr-stat__no">03</span><strong>2회</strong><span class="mgr-stat__name">순회 관리</span></li>
-              <li class="mgr-stat" style="--i:3"><span class="mgr-stat__no">04</span><strong>52분</strong><span class="mgr-stat__name">좌석 안내</span></li>
+              <li class="mgr-stat mgr-stat--tl" style="--i:0"><svg class="mgr-stat__icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><rect x="4" y="5" width="24" height="17" rx="2.5"/><path d="M9 14h4l2-4 3 8 2-4h3M12 27h8M16 22v5"/></svg><span class="mgr-stat__no">01</span><strong>24시간</strong><span class="mgr-stat__name">원격 관제</span></li>
+              <li class="mgr-stat mgr-stat--bl" style="--i:1"><svg class="mgr-stat__icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M20.5 4.5a6 6 0 0 0-5.7 7.9L5.6 21.6a2.6 2.6 0 0 0 3.7 3.7l9.2-9.2a6 6 0 0 0 7.9-5.7l-3.6 3.6-3.4-.9-.9-3.4z"/></svg><span class="mgr-stat__no">02</span><strong>1시간 48분</strong><span class="mgr-stat__name">출동 A/S</span></li>
+              <li class="mgr-stat mgr-stat--tr" style="--i:2"><svg class="mgr-stat__icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M5 12 7 5h18l2 7M5 12c0 2 1.5 3.5 3.67 3.5S11.33 14 11.33 12c0 2 1.5 3.5 3.67 3.5h2c2.17 0 3.67-1.5 3.67-3.5 0 2 1.5 3.5 3.66 3.5S27 14 27 12M5 12h22M7 15.5V27h18V15.5M13 27v-6h6v6"/></svg><span class="mgr-stat__no">03</span><strong>2회</strong><span class="mgr-stat__name">순회 관리</span></li>
+              <li class="mgr-stat mgr-stat--br" style="--i:3"><svg class="mgr-stat__icon" viewBox="0 0 32 32" aria-hidden="true" focusable="false"><path d="M10 4h12v12H10zM7 16h18v4H7zM9 20l-1 8M23 20l1 8M11 20v5M21 20v5"/></svg><span class="mgr-stat__no">04</span><strong>52분</strong><span class="mgr-stat__name">좌석 안내</span></li>
             </ul>
           </div>
         </div>
@@ -502,6 +502,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20260929-3"></script>
+  <script src="script.js?v=20261001-1"></script>
 </body>
 </html>

@@ -186,6 +186,8 @@ p { text-wrap: pretty; }
   -webkit-box-decoration-break: clone;
   box-decoration-break: clone;
 }
+/* 밝은 섹션용 — 같은 박스 형광펜을 라이트 옐로로 */
+.mark--light { background-image: linear-gradient(var(--light), var(--light)); }
 
 /* 손그림 물결 밑줄 — 나머지 섹션 타이틀 강조 (잉크색) */
 .ul {
@@ -610,15 +612,20 @@ p { text-wrap: pretty; }
 .manager__lead { font-size: 0.72em; color: var(--ink-soft); }
 .manager__head .sec-sub { font-weight: 400; }
 
-/* 왼쪽 캐릭터 | 오른쪽 지표 2×2 — 선 없이 수평 정렬과 여백으로만 한 그룹이 된다 */
+/* 가운데 캐릭터 | 양옆 말풍선 2개씩 — 꼬리가 캐릭터를 향해 한 그룹으로 묶인다 */
 .mgr-grid {
   display: grid;
-  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);   /* 캐릭터 약 38% */
+  grid-template-columns: minmax(0, 1fr) clamp(17rem, 31vw, 29rem) minmax(0, 1fr);
+  grid-template-areas:
+    "tl fig tr"
+    "bl fig br";
   align-items: center;
-  column-gap: clamp(3rem, 7vw, 8rem);
+  column-gap: clamp(1.5rem, 3.5vw, 4rem);
+  row-gap: clamp(2rem, 4vw, 3.5rem);
 }
+.mgr-stats { display: contents; }
 
-.mgr-fig { position: relative; }
+.mgr-fig { grid-area: fig; position: relative; }
 .mgr-fig img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
 /* 바닥 그림자 — 종이 위에 놓인 느낌만 */
 .mgr-fig::after {
@@ -632,13 +639,48 @@ p { text-wrap: pretty; }
   background: radial-gradient(closest-side, rgba(59, 26, 13, .16), rgba(59, 26, 13, 0));
 }
 
-.mgr-stats {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  column-gap: clamp(2rem, 4vw, 4rem);
-  row-gap: clamp(3rem, 6vw, 5.5rem);
+/* 말풍선 — 말랑한 흰 풍선 + 캐릭터 쪽 꼬리. 그림자는 drop-shadow라 꼬리까지 함께 진다 */
+.mgr-stat {
+  --bubble: #FFFFFF;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: min(100%, 22rem);
+  min-width: 0;
+  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.375rem, 2.2vw, 2rem);
+  border-radius: 2.5rem;
+  background: var(--bubble);
+  filter: drop-shadow(0 0.875rem 1.25rem rgba(59, 26, 13, .10)) drop-shadow(0 0.125rem 0.25rem rgba(59, 26, 13, .06));
 }
-.mgr-stat { display: flex; flex-direction: column; align-items: flex-start; }
+.mgr-stat::after {
+  content: "";
+  position: absolute;
+  top: 56%;
+  width: 2.5rem;
+  height: 2.25rem;
+  background: var(--bubble);
+}
+/* 왼쪽 풍선: 오른쪽 아래로 꼬리 · 오른쪽 풍선: 왼쪽 아래로 꼬리 */
+.mgr-stat--tl, .mgr-stat--bl { justify-self: end; transform-origin: 100% 60%; }
+.mgr-stat--tr, .mgr-stat--br { justify-self: start; transform-origin: 0 60%; }
+.mgr-stat--tl::after, .mgr-stat--bl::after { right: -2.125rem; clip-path: polygon(0 0, 100% 80%, 0 100%); }
+.mgr-stat--tr::after, .mgr-stat--br::after { left: -2.125rem; clip-path: polygon(100% 0, 0 80%, 100% 100%); }
+.mgr-stat--tl { grid-area: tl; align-self: end; }
+.mgr-stat--bl { grid-area: bl; align-self: start; translate: -1.25rem 0; }
+.mgr-stat--tr { grid-area: tr; align-self: end; translate: 0 2rem; }
+.mgr-stat--br { grid-area: br; align-self: start; translate: 1.25rem 0; }
+
+.mgr-stat__icon {
+  width: 2.75rem;
+  height: 2.75rem;
+  margin-bottom: 1rem;
+  fill: none;
+  stroke: var(--ink);
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
 .mgr-stat__no {
   display: inline-flex;
   align-items: center;
@@ -657,32 +699,32 @@ p { text-wrap: pretty; }
   background: var(--light);
 }
 .mgr-stat strong {
-  margin-top: 0.875rem;
+  margin-top: 0.5rem;
   font-family: 'Jalnan2', 'yg-jalnan', var(--font-display);
-  font-size: clamp(2.25rem, 3.8vw, 4rem);
+  font-size: clamp(1.75rem, 2.6vw, 2.75rem);
   font-weight: normal;
   line-height: 1.1;
   color: var(--ink);
   white-space: nowrap;
 }
 .mgr-stat__name {
-  margin-top: 0.75rem;
-  font-size: 1.125rem;
+  margin-top: 0.5rem;
+  font-size: 1.0625rem;
   font-weight: 600;
   line-height: 1.4;
   color: var(--ink-soft);
 }
 
-/* 진입 모션: 캐릭터가 먼저 올라오고, 지표가 0.1s 간격으로 따라온다 */
+/* 진입 모션: 캐릭터가 먼저 올라오고, 말풍선이 꼬리 쪽에서 0.1s 간격으로 톡 부풀어 오른다 */
 .js .mgr-fig { opacity: 0; translate: 0 1.5rem; transition: opacity .7s var(--ease), translate .8s var(--ease); }
 .js .mgr-grid.is-in .mgr-fig { opacity: 1; translate: 0 0; }
 .js .mgr-stat {
   opacity: 0;
-  translate: 0 .75rem;
-  transition: opacity .5s var(--ease), translate .6s var(--ease);
+  scale: .82;
+  transition: opacity .4s var(--ease), scale .6s var(--ease-pop);
   transition-delay: calc(.6s + var(--i, 0) * .1s);
 }
-.js .mgr-grid.is-in .mgr-stat { opacity: 1; translate: 0 0; }
+.js .mgr-grid.is-in .mgr-stat { opacity: 1; scale: 1; }
 
 /* ---------- 5-4. 매장의 하루 ---------- */
 
@@ -1477,13 +1519,35 @@ p { text-wrap: pretty; }
 }
 
 /* 헤더 · 히어로 — 768px 이하 */
-/* 점장 — 좁은 화면에선 캐릭터를 위에, 지표 2×2는 그 아래 */
+/* 점장 — 좁은 화면에선 캐릭터를 위에, 말풍선 2×2는 그 아래 (윗줄 꼬리만 캐릭터를 향해 위로) */
 @media (max-width: 760px) {
-  .mgr-grid { grid-template-columns: minmax(0, 1fr); row-gap: 3.5rem; }
-  .mgr-fig { width: min(70%, 18rem); }
-  .mgr-stats { column-gap: 1rem; row-gap: 2.5rem; }
-  .mgr-stat strong { font-size: clamp(1.75rem, 7vw, 2.25rem); }
-  .mgr-stat__name { font-size: 1rem; }
+  .mgr-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-areas:
+      "fig fig"
+      "tl tr"
+      "bl br";
+    column-gap: 0.875rem;
+    row-gap: 1rem;
+  }
+  .mgr-fig { width: min(70%, 18rem); justify-self: center; margin-bottom: 1.75rem; }
+  .mgr-stat { width: 100%; margin: 0; padding: 1.125rem 1.125rem 1.25rem; border-radius: 1.5rem; justify-self: stretch; align-self: stretch; transform-origin: 50% 0; }
+  .mgr-stat--tl, .mgr-stat--tr, .mgr-stat--bl, .mgr-stat--br { margin: 0; translate: none; }
+  .mgr-stat::after { display: none; }
+  .mgr-stat--tl::after, .mgr-stat--tr::after {
+    display: block;
+    top: -1.125rem;
+    left: 50%;
+    right: auto;
+    width: 1.5rem;
+    height: 1.25rem;
+    translate: -50% 0;
+  }
+  .mgr-stat--tl::after { clip-path: polygon(20% 100%, 100% 0, 85% 100%); }
+  .mgr-stat--tr::after { clip-path: polygon(15% 100%, 0 0, 80% 100%); }
+  .mgr-stat__icon { width: 1.875rem; height: 1.875rem; margin-bottom: 0.625rem; }
+  .mgr-stat strong { font-size: clamp(1.25rem, 5.6vw, 1.875rem); }
+  .mgr-stat__name { font-size: 0.9375rem; }
 }
 
 @media (max-width: 768px) {
