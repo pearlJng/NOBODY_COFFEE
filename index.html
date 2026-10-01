@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
   <link rel="preload" as="image" href="asset/img/hero/hero-01.webp" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=20261001-6">
+  <link rel="stylesheet" href="style.css?v=20261001-7">
 </head>
 <body>
 
@@ -179,91 +179,87 @@
     </section>
 
     <!-- ============ 4. 매장의 하루 ============ -->
+    <!-- 스크롤하는 동안 화면을 붙잡고, 시간이 흐를 때마다 좌(본사) · 우(점주) 역할이 함께 바뀐다 (script.js 4) -->
     <section class="section day" id="day">
       <div class="container">
-        <div class="sec-head" data-reveal>
+        <div class="sec-head day__head" data-reveal>
           <h2 class="sec-title">점주님의 하루는 생각보다 <span class="ul">짧습니다.</span></h2>
           <p class="sec-sub">NOBODY COFFEE 성수점의 어느 화요일을 그대로 옮겼어요.</p>
         </div>
+      </div>
 
-        <div class="day__grid">
-          <!-- 좌측 고정 -->
-          <div class="day__aside">
-            <div class="day__sticky">
+      <div class="day__scroller" id="dayScroller" style="--steps:6">
+        <div class="day__stage" id="dayStage">
+          <div class="container day__inner">
+            <div class="day__top">
               <p class="day__clock" aria-live="off"><span id="dayClock">06:50</span></p>
-              <div class="day__photos">
-                <figure class="ph is-active" data-phase="0">
-                  <img src="asset/img/day-morning.webp" width="1400" height="1050" loading="lazy" alt="아침 햇빛이 드는 빈 매장 창가 좌석">
-                </figure>
-                <figure class="ph" data-phase="1">
-                  <img src="asset/img/day-afternoon.webp" width="1400" height="1050" loading="lazy" alt="낮, 손님 없는 매장 카운터와 좌석">
-                </figure>
-                <figure class="ph" data-phase="2">
-                  <img src="asset/img/day-night.webp" width="1400" height="1050" loading="lazy" alt="밤, 조명이 켜진 채 비어 있는 매장">
-                </figure>
-              </div>
+              <ol class="day__ticks" aria-hidden="true" style="--n:6">
+                <li class="day-tick" data-i="0" data-time="06:50" data-phase="0"><span>06:50</span></li>
+                <li class="day-tick" data-i="1" data-time="08:10" data-phase="0"><span>08:10</span></li>
+                <li class="day-tick" data-i="2" data-time="11:30" data-phase="1"><span>11:30</span></li>
+                <li class="day-tick" data-i="3" data-time="14:20" data-phase="1"><span>14:20</span></li>
+                <li class="day-tick" data-i="4" data-time="19:40" data-phase="2"><span>19:40</span></li>
+                <li class="day-tick" data-i="5" data-time="22:30" data-phase="2"><span>22:30</span></li>
+                <li class="day__ticks-bar"><span class="day__ticks-fill" id="dayFill"></span></li>
+              </ol>
             </div>
-          </div>
 
-          <!-- 우측 타임라인 -->
-          <div class="day__main">
-            <div class="day__track" aria-hidden="true"><span class="day__fill" id="dayFill"></span></div>
+            <div class="day__split">
+              <!-- 좌: 본사 -->
+              <article class="day-panel day-panel--hq">
+                <header class="day-panel__head">
+                  <span class="day-panel__who">본사가 하는 일</span>
+                  <span class="day-panel__live"><i aria-hidden="true"></i>LIVE</span>
+                </header>
+                <div class="day-panel__view">
+                  <figure class="ph is-active" data-phase="0"><img src="asset/img/day-morning.webp" width="1400" height="1050" loading="lazy" alt="아침 햇빛이 드는 빈 매장 창가 좌석"></figure>
+                  <figure class="ph" data-phase="1"><img src="asset/img/day-afternoon.webp" width="1400" height="1050" loading="lazy" alt="낮, 손님 없는 매장 카운터와 좌석"></figure>
+                  <figure class="ph" data-phase="2"><img src="asset/img/day-night.webp" width="1400" height="1050" loading="lazy" alt="밤, 조명이 켜진 채 비어 있는 매장"></figure>
+                  <span class="day-panel__cam" aria-hidden="true">CAM 01 · 성수점</span>
+                </div>
+                <ol class="day-panel__steps">
+                  <li class="day-step" data-i="0"><span class="day-step__status">자동 점검</span><p class="day-step__text">머신 자가 점검,<br>원두·우유 잔량 확인</p></li>
+                  <li class="day-step" data-i="1"><span class="day-step__status">실시간 관제</span><p class="day-step__text">출근 시간 주문 몰림,<br>대기열 실시간 모니터링</p></li>
+                  <li class="day-step" data-i="2"><span class="day-step__status">현장 방문</span><p class="day-step__text">순회 매니저 방문,<br>청소·재고 보충</p></li>
+                  <li class="day-step" data-i="3"><span class="day-step__status">긴급 출동</span><p class="day-step__text">제빙기 온도 이상 감지<br>→ 기사 출동 → 수리 완료</p></li>
+                  <li class="day-step" data-i="4"><span class="day-step__status">원격 안내</span><p class="day-step__text">3시간째 앉아 계신 손님께<br>좌석 안내</p></li>
+                  <li class="day-step" data-i="5"><span class="day-step__status">자동 마감</span><p class="day-step__text">자동 마감,<br>오늘의 리포트 발송</p></li>
+                </ol>
+              </article>
 
-            <ol class="day__list">
-              <li class="day-card" data-time="06:50" data-owner="0" data-phase="0">
-                <p class="day-card__time">06:50</p>
-                <dl class="day-card__rows">
-                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>머신 자가 점검, 원두·우유 잔량 확인</dd></div>
-                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>주무시는 중
-                    <svg class="zzz" viewBox="0 0 48 32" aria-hidden="true"><path d="M4 18 h10 l-10 10 h10 M20 8 h8 l-8 8 h8 M34 2 h6 l-6 6 h6"/></svg>
-                  </dd></div>
-                </dl>
-              </li>
-              <li class="day-card" data-time="08:10" data-owner="0" data-phase="0">
-                <p class="day-card__time">08:10</p>
-                <dl class="day-card__rows">
-                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>출근 시간 주문 몰림, 대기열 모니터링</dd></div>
-                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>출근하는 중</dd></div>
-                </dl>
-              </li>
-              <li class="day-card" data-time="11:30" data-owner="30" data-phase="1">
-                <p class="day-card__time">11:30</p>
-                <dl class="day-card__rows">
-                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>순회 매니저 방문, 청소·재고 보충</dd></div>
-                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>앱으로 청소 사진 확인 <mark>(30초)</mark></dd></div>
-                </dl>
-              </li>
-              <li class="day-card" data-time="14:20" data-owner="10" data-phase="1">
-                <p class="day-card__time">14:20</p>
-                <dl class="day-card__rows">
-                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>제빙기 온도 이상 감지 → 기사 출동 → 수리 완료</dd></div>
-                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>“처리 완료” 알림 확인 <mark>(10초)</mark></dd></div>
-                </dl>
-              </li>
-              <li class="day-card" data-time="19:40" data-owner="0" data-phase="2">
-                <p class="day-card__time">19:40</p>
-                <dl class="day-card__rows">
-                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>3시간째 앉아 계신 손님께 좌석 안내</dd></div>
-                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>저녁 드시는 중</dd></div>
-                </dl>
-              </li>
-              <li class="day-card" data-time="22:30" data-owner="300" data-phase="2">
-                <p class="day-card__time">22:30</p>
-                <dl class="day-card__rows">
-                  <div class="row row--hq"><dt>본사가 하는 일</dt><dd>자동 마감, 오늘의 리포트 발송</dd></div>
-                  <div class="row row--owner"><dt>점주님이 하는 일</dt><dd>리포트 읽기 <mark>(5분)</mark></dd></div>
-                </dl>
-              </li>
-            </ol>
-
-            <p class="day__end" id="dayEnd" data-reveal>나머지 시간은, <span class="ul">점주님 거예요.</span></p>
-
-            <div class="day__counter" id="dayCounter">
-              <span class="day__counter-label">오늘 점주님이 쓴 시간</span>
-              <span class="day__counter-value" id="dayCounterValue">00:00</span>
+              <!-- 우: 점주 -->
+              <article class="day-panel day-panel--owner">
+                <header class="day-panel__head">
+                  <span class="day-panel__who">점주님이 하는 일</span>
+                </header>
+                <div class="day-panel__view">
+                  <svg class="day-icon is-active" data-i="0" viewBox="0 0 64 56" aria-hidden="true" focusable="false"><path d="M14 44h36M14 44V30M50 44v-8a6 6 0 0 0-6-6H26v14M14 36h12"/><circle cx="20" cy="31" r="3.5"/><path d="M38 12h7l-7 7h7M48 5h5l-5 5h5"/></svg>
+                  <svg class="day-icon" data-i="1" viewBox="0 0 64 56" aria-hidden="true" focusable="false"><rect x="18" y="8" width="28" height="36" rx="6"/><path d="M18 28h28M24 36h2M38 36h2M24 44l-4 6M40 44l4 6M24 15h16"/></svg>
+                  <svg class="day-icon" data-i="2" viewBox="0 0 64 56" aria-hidden="true" focusable="false"><rect x="20" y="6" width="24" height="44" rx="5"/><path d="M29 44h6"/><rect x="25" y="13" width="14" height="12" rx="1.5"/><path d="m25 23 4-4 3 3 2-2 5 4"/><path d="m27 31 3 3 6-6"/></svg>
+                  <svg class="day-icon" data-i="3" viewBox="0 0 64 56" aria-hidden="true" focusable="false"><rect x="20" y="6" width="24" height="44" rx="5"/><path d="M29 44h6"/><path d="M26 28v-5a6 6 0 0 1 12 0v5l2 3H24zM30 34a2 2 0 0 0 4 0"/><path d="M47 14l4-3M48 21h5"/></svg>
+                  <svg class="day-icon" data-i="4" viewBox="0 0 64 56" aria-hidden="true" focusable="false"><path d="M12 30h40a20 20 0 0 1-40 0zM24 50h16"/><path d="M40 8 30 26M48 10 36 26"/><path d="M24 22c0-3 3-3 3-6M32 20c0-3 3-3 3-6" opacity=".55"/></svg>
+                  <svg class="day-icon" data-i="5" viewBox="0 0 64 56" aria-hidden="true" focusable="false"><rect x="20" y="6" width="24" height="44" rx="5"/><path d="M29 44h6"/><path d="M26 15h12M26 20h8"/><path d="M26 34v-4M31 34v-8M36 34v-6"/></svg>
+                </div>
+                <ol class="day-panel__steps">
+                  <li class="day-step" data-i="0" data-owner="0"><p class="day-step__text">주무시는 중</p><span class="day-step__spent">0초</span></li>
+                  <li class="day-step" data-i="1" data-owner="0"><p class="day-step__text">출근하는 중</p><span class="day-step__spent">0초</span></li>
+                  <li class="day-step" data-i="2" data-owner="30"><p class="day-step__text">앱으로 청소 사진 확인</p><span class="day-step__spent">30초</span></li>
+                  <li class="day-step" data-i="3" data-owner="10"><p class="day-step__text">“처리 완료” 알림 확인</p><span class="day-step__spent">10초</span></li>
+                  <li class="day-step" data-i="4" data-owner="0"><p class="day-step__text">저녁 드시는 중</p><span class="day-step__spent">0초</span></li>
+                  <li class="day-step" data-i="5" data-owner="300"><p class="day-step__text">리포트 읽기</p><span class="day-step__spent">5분</span></li>
+                </ol>
+                <div class="day__counter" id="dayCounter">
+                  <span class="day__counter-label">오늘 점주님이 쓴 시간</span>
+                  <span class="day__counter-value" id="dayCounterValue">00:00</span>
+                </div>
+              </article>
             </div>
           </div>
         </div>
+      </div>
+
+      <div class="container">
+        <p class="day__end" id="dayEnd" data-reveal>나머지 시간은, <span class="ul">점주님 거예요.</span></p>
       </div>
     </section>
 
@@ -514,6 +510,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261001-6"></script>
+  <script src="script.js?v=20261001-7"></script>
 </body>
 </html>

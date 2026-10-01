@@ -194,19 +194,23 @@
   }
 
   /* ---------- 4. 매장의 하루 ---------- */
+  // 스크롤 구간을 단계 수만큼 나눠, 지금 단계의 시계 · 눈금 · 본사/점주 문구 · 매장 사진 · 아이콘을 함께 바꾼다
   const day = document.getElementById('day');
-  const dayList = day.querySelector('.day__list');
-  const dayCards = [...day.querySelectorAll('.day-card')];
-  const dayTrack = day.querySelector('.day__track');
+  const dayScroller = document.getElementById('dayScroller');
+  const dayStage = document.getElementById('dayStage');
+  const dayTicks = [...day.querySelectorAll('.day-tick')];
+  const daySteps = [...day.querySelectorAll('.day-step, .day-icon')];
+  const ownerSteps = [...day.querySelectorAll('.day-panel--owner .day-step')];
   const dayFill = document.getElementById('dayFill');
   const dayClock = document.getElementById('dayClock');
-  const dayPhotos = [...day.querySelectorAll('.day__photos .ph')];
+  const dayPhotos = [...day.querySelectorAll('.day-panel--hq .ph')];
   const dayEnd = document.getElementById('dayEnd');
   const counterValue = document.getElementById('dayCounterValue');
+  const stepCount = dayTicks.length;
 
   // 점주님이 쓴 시간(초) 누적값
-  const ownerTotals = dayCards.reduce((acc, card, i) => {
-    acc.push((acc[i - 1] || 0) + parseInt(card.dataset.owner, 10));
+  const ownerTotals = ownerSteps.reduce((acc, step, i) => {
+    acc.push((acc[i - 1] || 0) + parseInt(step.dataset.owner, 10));
     return acc;
   }, []);
 
@@ -253,43 +257,36 @@
     }
   };
 
-  const setActiveCard = index => {
+  const setActiveStep = index => {
     activeIndex = index;
-    dayCards.forEach((card, i) => {
-      card.classList.toggle('is-active', i === index);
-      card.classList.toggle('is-past', i < index);
+    dayTicks.forEach((tick, i) => {
+      tick.classList.toggle('is-active', i === index);
+      tick.classList.toggle('is-past', i < index);
     });
+    daySteps.forEach(el => el.classList.toggle('is-active', +el.dataset.i === index));
 
-    const card = dayCards[index];
-    dayClock.textContent = card.dataset.time;
+    const tick = dayTicks[index];
+    dayClock.textContent = tick.dataset.time;
     if (!reduceMotion) {
       dayClock.classList.remove('tick');
       void dayClock.offsetWidth;          // 애니메이션 재시작
       dayClock.classList.add('tick');
     }
-    dayPhotos.forEach(ph => ph.classList.toggle('is-active', ph.dataset.phase === card.dataset.phase));
+    dayPhotos.forEach(ph => ph.classList.toggle('is-active', ph.dataset.phase === tick.dataset.phase));
 
     if (!isFinal) animateCounter(ownerTotals[index]);
   };
 
-  const layoutDayTrack = () => {
-    dayTrack.style.top = `${dayList.offsetTop}px`;
-    dayTrack.style.height = `${dayList.offsetHeight}px`;
-  };
-
   const updateDay = () => {
-    const mid = window.innerHeight * 0.5;
-    const rect = dayList.getBoundingClientRect();
-    const progress = clamp((mid - rect.top) / rect.height);
+    const travel = dayScroller.offsetHeight - dayStage.offsetHeight;
+    const stickTop = parseFloat(getComputedStyle(dayStage).top) || 0;
+    const progress = travel > 0 ? clamp((stickTop - dayScroller.getBoundingClientRect().top) / travel) : 0;
 
-    dayFill.style.transform = `scaleY(${progress})`;
+    dayFill.style.transform = `scaleX(${progress})`;
     day.style.setProperty('--p', progress.toFixed(3));
 
-    let index = 0;
-    dayCards.forEach((card, i) => {
-      if (card.getBoundingClientRect().top < mid) index = i;
-    });
-    if (index !== activeIndex) setActiveCard(index);
+    const index = Math.min(stepCount - 1, Math.floor(progress * stepCount));
+    if (index !== activeIndex) setActiveStep(index);
 
     setFinal(dayEnd.getBoundingClientRect().top < window.innerHeight * 0.8);
   };
@@ -320,14 +317,13 @@
       ticking = false;
     });
   };
-  const onResize = () => { measureWordmark(); layoutDayTrack(); onScroll(); };
+  const onResize = () => { measureWordmark(); onScroll(); };
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onResize);
   window.addEventListener('load', onResize);
   if (document.fonts) document.fonts.ready.then(onResize);
   measureWordmark();
-  layoutDayTrack();
   updateHeader();
   wordmark.classList.add('is-ready');
   updateDay();
