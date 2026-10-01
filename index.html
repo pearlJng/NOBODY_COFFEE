@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap">
   <link rel="preload" as="image" href="asset/img/hero/hero-01.webp" type="image/webp">
-  <link rel="stylesheet" href="style.css?v=20261001-13">
+  <link rel="stylesheet" href="style.css?v=20261001-14">
 </head>
 <body>
 
@@ -269,10 +269,11 @@
         <div class="record__body">
           <article class="rec-hero" data-reveal>
             <p class="rec-hero__label">머신 가동률</p>
-            <p class="rec-hero__num">
-              <span data-count="99.2" data-decimals="1">99.2</span><small>%</small>
-              <svg class="doodle doodle--ring" viewBox="0 0 220 110" preserveAspectRatio="none" aria-hidden="true"><path pathLength="1" d="M128 10 C 70 4, 12 22, 10 56 C 8 92, 70 104, 120 102 C 176 100, 212 82, 210 52 C 208 22, 160 6, 102 12"/></svg>
-            </p>
+            <p class="rec-hero__num"><span data-count="99.2" data-decimals="1">99.2</span><small>%</small></p>
+            <div class="rec-hero__meter" aria-hidden="true">
+              <div class="rec-hero__bar"><span></span></div>
+              <div class="rec-hero__legend"><span>가동</span><span>멈춤 0.8%</span></div>
+            </div>
             <p class="rec-hero__desc">1년에 멈춘 시간, <br>다 합쳐도 하루가 조금 넘어요.</p>
           </article>
 
@@ -498,6 +499,6 @@
     </div>
   </footer>
 
-  <script src="script.js?v=20261001-13"></script>
+  <script src="script.js?v=20261001-14"></script>
 </body>
 </html>

@@ -1093,7 +1093,7 @@ p { text-wrap: pretty; }
 .rec-hero__num {
   position: relative;
   align-self: flex-start;
-  margin: 0.2em 0 0.2em 0.14em;              /* 동그라미가 라벨·설명에 닿지 않도록 */
+  margin: 0.08em 0 0;
   font-family: var(--font-display);
   font-size: clamp(4.5rem, min(9vw, 15vh), 9rem);
   font-weight: 700;
@@ -1102,18 +1102,34 @@ p { text-wrap: pretty; }
   white-space: nowrap;
 }
 .rec-hero__num small { margin-left: 0.375rem; font-family: var(--font-body); font-size: 0.32em; font-weight: 800; letter-spacing: 0; }
-.rec-hero .doodle--ring path { stroke: var(--light); }
-.rec-hero__desc { font-size: clamp(1rem, min(1.35vw, 2.3vh), 1.25rem); font-weight: 600; line-height: 1.5; }
-
-.doodle--ring {
-  position: absolute;
-  top: 50%;
-  left: -14%;
-  width: 128%;
-  height: auto;
-  aspect-ratio: 1.75 / 1;
-  transform: translateY(-50%) rotate(-4deg);
+/* 가동률 막대 — 99.2%만큼 노랗게 차고, 끝의 짧은 빈칸이 '멈춘 시간' */
+.rec-hero__meter { width: 100%; margin-top: -0.25rem; }
+.rec-hero__bar {
+  height: 0.875rem;
+  padding: 2px;
+  border: 2px solid var(--paper);
+  border-radius: 999px;
 }
+.rec-hero__bar span {
+  display: block;
+  width: 99.2%;
+  height: 100%;
+  border-radius: 999px;
+  background: var(--light);
+}
+.js .rec-hero__bar span { width: 0; transition: width 1.4s cubic-bezier(.65, 0, .35, 1) .3s; }
+.js .rec-hero.is-in .rec-hero__bar span { width: 99.2%; }
+.rec-hero__legend {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 0.5rem;
+  color: var(--on-dark-soft);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+.rec-hero__desc { font-size: clamp(1rem, min(1.35vw, 2.3vh), 1.25rem); font-weight: 600; line-height: 1.5; }
 
 /* 우: 지표 3개 — 선 카드를 세로로 쌓아 왼쪽 패널 높이에 맞춘다 */
 .rec-stats {
@@ -1162,7 +1178,10 @@ p { text-wrap: pretty; }
   .record__body { grid-template-columns: minmax(0, 1fr); gap: 0.625rem; }
   .rec-hero { gap: 0.375rem; padding: 1rem 1.125rem; border-radius: var(--r-md); }
   .rec-hero__label { font-size: 0.75rem; padding: 2px 0.625rem; }
-  .rec-hero__num { margin: 0.28em 0 0.12em 0.4em; font-size: clamp(2.75rem, 13vw, 3.5rem); }
+  .rec-hero__num { margin: 0.05em 0 0; font-size: clamp(2.75rem, 13vw, 3.5rem); }
+  .rec-hero__meter { margin-top: 0.25rem; }
+  .rec-hero__bar { height: 0.75rem; }
+  .rec-hero__legend { margin-top: 0.375rem; font-size: 0.6875rem; }
   .rec-hero__desc { font-size: 0.8125rem; }
   .rec-hero__desc br { display: none; }
   .rec-stats { grid-template-rows: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
