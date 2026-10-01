@@ -461,7 +461,7 @@ p { text-wrap: pretty; }
 }
 .hero__title {
   font-family: var(--font-display);
-  font-size: clamp(2.25rem, 3.45vw, 4rem);
+  font-size: clamp(2.25rem, 2.4vw, 4rem);
   font-weight: normal;                        /* 한 굵기만 있는 서체라 가짜 볼드 방지 */
   line-height: 1.15;
   letter-spacing: -0.005em;
@@ -643,89 +643,77 @@ p { text-wrap: pretty; }
   background: radial-gradient(closest-side, rgba(59, 26, 13, .16), rgba(59, 26, 13, 0));
 }
 
-/* 말풍선 — 말랑한 흰 풍선 + 캐릭터 쪽 꼬리. 그림자는 drop-shadow라 꼬리까지 함께 진다 */
+/* 말풍선 — 점장이 직접 건네는 한마디. 크림 화이트 + 아주 옅은 그림자 + 캐릭터를 향한 작은 꼬리 */
 .mgr-stat {
   --bubble: #FFFFFF;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: min(100%, 22rem);
   min-width: 0;
-  padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1.375rem, 2.2vw, 2rem);
-  border-radius: 2.5rem;
+  padding: clamp(1.25rem, 1.9vw, 1.75rem) clamp(1.375rem, 2.1vw, 2rem);
+  border-radius: 1.75rem;
   background: var(--bubble);
-  filter: drop-shadow(0 0.875rem 1.25rem rgba(59, 26, 13, .10)) drop-shadow(0 0.125rem 0.25rem rgba(59, 26, 13, .06));
+  filter: drop-shadow(0 0.625rem 1.25rem rgba(59, 26, 13, .07)) drop-shadow(0 1px 1px rgba(59, 26, 13, .05));
 }
 .mgr-stat::after {
   content: "";
   position: absolute;
-  top: 56%;
-  width: 2.5rem;
-  height: 2.25rem;
+  bottom: 1.5rem;
+  width: 1.375rem;
+  height: 1.25rem;
   background: var(--bubble);
 }
-/* 왼쪽 풍선: 오른쪽 아래로 꼬리 · 오른쪽 풍선: 왼쪽 아래로 꼬리 */
-.mgr-stat--tl, .mgr-stat--bl { justify-self: end; transform-origin: 100% 60%; }
-.mgr-stat--tr, .mgr-stat--br { justify-self: start; transform-origin: 0 60%; }
-.mgr-stat--tl::after, .mgr-stat--bl::after { right: -2.125rem; clip-path: polygon(0 0, 100% 80%, 0 100%); }
-.mgr-stat--tr::after, .mgr-stat--br::after { left: -2.125rem; clip-path: polygon(100% 0, 0 80%, 100% 100%); }
-.mgr-stat--tl { grid-area: tl; align-self: end; }
-.mgr-stat--bl { grid-area: bl; align-self: start; translate: -1.25rem 0; }
-.mgr-stat--tr { grid-area: tr; align-self: end; translate: 0 2rem; }
-.mgr-stat--br { grid-area: br; align-self: start; translate: 1.25rem 0; }
+/* 왼쪽 풍선: 꼬리가 오른쪽(캐릭터)으로 · 오른쪽 풍선: 왼쪽으로 */
+.mgr-stat--tl, .mgr-stat--bl { justify-self: end; transform-origin: 100% 80%; }
+.mgr-stat--tr, .mgr-stat--br { justify-self: start; transform-origin: 0 80%; }
+.mgr-stat--tl::after, .mgr-stat--bl::after { right: -1.125rem; clip-path: polygon(0 0, 100% 100%, 0 100%); }
+.mgr-stat--tr::after, .mgr-stat--br::after { left: -1.125rem; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+/* 똑같은 카드 4장처럼 보이지 않게 — 폭과 위치를 조금씩 어긋나게 */
+.mgr-stat--tl { grid-area: tl; align-self: end; width: min(100%, 21rem); translate: 0 -0.5rem; }
+.mgr-stat--bl { grid-area: bl; align-self: start; width: min(100%, 23.5rem); translate: calc(-1 * clamp(0rem, 2vw - 0.75rem, 1.5rem)) 0.5rem; }
+.mgr-stat--tr { grid-area: tr; align-self: end; width: min(100%, 22.5rem); translate: 0 1.75rem; }
+.mgr-stat--br { grid-area: br; align-self: start; width: min(100%, 20.5rem); translate: clamp(0rem, 2vw - 0.75rem, 1.75rem) 2.25rem; }
 
+.mgr-stat__say {
+  margin: 0;
+  font-size: clamp(1.0625rem, 1.35vw, 1.3125rem);
+  font-weight: 600;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--bean);
+  text-wrap: balance;
+  word-break: keep-all;
+}
+.mgr-stat__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.4375rem;
+  margin: 1rem 0 0;
+  font-size: 0.8125rem;
+  font-weight: 500;
+  line-height: 1.3;
+  color: var(--ink-faint);
+}
+.mgr-stat__meta b { font-weight: 700; color: var(--ink-soft); }
 .mgr-stat__icon {
-  width: 2.75rem;
-  height: 2.75rem;
-  margin-bottom: 1rem;
+  flex: none;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0.25rem;
+  border-radius: 50%;
+  background: var(--light);
   fill: none;
-  stroke: var(--ink);
-  stroke-width: 2.2;
+  stroke: var(--bean);
+  stroke-width: 2.6;
   stroke-linecap: round;
   stroke-linejoin: round;
 }
-.mgr-stat__no {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  color: var(--ink-faint);
-}
-.mgr-stat__no::before {
-  content: "";
-  width: 0.5rem;
-  height: 0.5rem;
-  border-radius: 50%;
-  background: var(--light);
-}
-.mgr-stat strong {
-  margin-top: 0.5rem;
-  font-family: 'Jalnan2', 'yg-jalnan', var(--font-display);
-  font-size: clamp(1.75rem, 2.6vw, 2.75rem);
-  font-weight: normal;
-  line-height: 1.1;
-  color: var(--ink);
-  white-space: nowrap;
-}
-.mgr-stat__name {
-  margin-top: 0.5rem;
-  font-size: 1.0625rem;
-  font-weight: 600;
-  line-height: 1.4;
-  color: var(--ink-soft);
-}
 
-/* 진입 모션: 캐릭터가 먼저 올라오고, 말풍선이 꼬리 쪽에서 0.1s 간격으로 톡 부풀어 오른다 */
+/* 진입 모션: 캐릭터가 먼저 올라오고, 말풍선이 꼬리 쪽에서 0.1s 간격으로 살짝 부풀어 오른다 */
 .js .mgr-fig { opacity: 0; translate: 0 1.5rem; transition: opacity .7s var(--ease), translate .8s var(--ease); }
 .js .mgr-grid.is-in .mgr-fig { opacity: 1; translate: 0 0; }
 .js .mgr-stat {
   opacity: 0;
-  scale: .82;
-  transition: opacity .4s var(--ease), scale .6s var(--ease-pop);
+  scale: .9;
+  transition: opacity .45s var(--ease), scale .6s var(--ease);
   transition-delay: calc(.6s + var(--i, 0) * .1s);
 }
 .js .mgr-grid.is-in .mgr-stat { opacity: 1; scale: 1; }
@@ -1523,35 +1511,23 @@ p { text-wrap: pretty; }
 }
 
 /* 헤더 · 히어로 — 768px 이하 */
-/* 점장 — 좁은 화면에선 캐릭터를 위에, 말풍선 2×2는 그 아래 (윗줄 꼬리만 캐릭터를 향해 위로) */
+/* 점장 — 좁은 화면에선 캐릭터를 위에, 말풍선은 대화처럼 좌우로 번갈아 한 줄씩 */
 @media (max-width: 760px) {
   .mgr-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    grid-template-areas:
-      "fig fig"
-      "tl tr"
-      "bl br";
-    column-gap: 0.875rem;
-    row-gap: 1rem;
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "fig" "tl" "bl" "tr" "br";
+    row-gap: 0.875rem;
   }
-  .mgr-fig { width: min(70%, 18rem); justify-self: center; margin-bottom: 1.75rem; }
-  .mgr-stat { width: 100%; margin: 0; padding: 1.125rem 1.125rem 1.25rem; border-radius: 1.5rem; justify-self: stretch; align-self: stretch; transform-origin: 50% 0; }
-  .mgr-stat--tl, .mgr-stat--tr, .mgr-stat--bl, .mgr-stat--br { margin: 0; translate: none; }
-  .mgr-stat::after { display: none; }
-  .mgr-stat--tl::after, .mgr-stat--tr::after {
-    display: block;
-    top: -1.125rem;
-    left: 50%;
-    right: auto;
-    width: 1.5rem;
-    height: 1.25rem;
-    translate: -50% 0;
-  }
-  .mgr-stat--tl::after { clip-path: polygon(20% 100%, 100% 0, 85% 100%); }
-  .mgr-stat--tr::after { clip-path: polygon(15% 100%, 0 0, 80% 100%); }
-  .mgr-stat__icon { width: 1.875rem; height: 1.875rem; margin-bottom: 0.625rem; }
-  .mgr-stat strong { font-size: clamp(1.25rem, 5.6vw, 1.875rem); }
-  .mgr-stat__name { font-size: 0.9375rem; }
+  .mgr-fig { width: min(64%, 16rem); justify-self: center; margin-bottom: 1.5rem; }
+  .mgr-stat { padding: 1.125rem 1.25rem 1.125rem; border-radius: 1.375rem; }
+  .mgr-stat--tl, .mgr-stat--bl, .mgr-stat--tr, .mgr-stat--br { width: min(88%, 21rem); translate: none; align-self: auto; }
+  .mgr-stat--tl, .mgr-stat--tr { justify-self: start; transform-origin: 0 0; }
+  .mgr-stat--bl, .mgr-stat--br { justify-self: end; transform-origin: 100% 0; }
+  /* 꼬리는 위쪽 모서리 — 대화 말풍선처럼 */
+  .mgr-stat::after { bottom: auto; top: -0.5rem; width: 1rem; height: 0.875rem; }
+  .mgr-stat--tl::after, .mgr-stat--tr::after { left: 1.5rem; right: auto; clip-path: polygon(0 0, 100% 100%, 0 100%); }
+  .mgr-stat--bl::after, .mgr-stat--br::after { right: 1.5rem; left: auto; clip-path: polygon(100% 0, 100% 100%, 0 100%); }
+  .mgr-stat__say { font-size: 1.0625rem; }
 }
 
 @media (max-width: 768px) {
