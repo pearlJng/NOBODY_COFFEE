@@ -624,7 +624,7 @@ p { text-wrap: pretty; }
     "tl fig tr"
     "bl fig br";
   align-items: center;
-  column-gap: clamp(1.5rem, 3.5vw, 4rem);
+  column-gap: clamp(2.5rem, 5vw, 5rem);
   row-gap: clamp(2rem, 4vw, 3.5rem);
 }
 .mgr-stats { display: contents; }
@@ -632,36 +632,37 @@ p { text-wrap: pretty; }
 /* 점장 장면 — 배경 → 점장 → 낮은 책상 → 컵 · 노트북 순으로 겹친다. 소품 PNG는 원본 그대로 */
 .mgr-fig { grid-area: fig; position: relative; }
 .mgr-fig__char { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
-/* 책상 상판 — 캐릭터 하단의 잘린 단면을 가리고, 아래로 갈수록 종이색에 녹아든다 */
+/* 작은 카페 테이블 — 얇은 아이보리 상판(윗면 + 앞 모서리)만. 캐릭터 하단의 잘린 단면을 가린다 */
 .mgr-desk {
   position: absolute;
   z-index: 2;
-  left: -12%;
-  right: -12%;
+  left: -17%;
+  right: -17%;
   top: 92.5%;
-  height: 17%;
-  border-radius: 1.5rem 1.5rem 0 0;
-  background: linear-gradient(180deg, #F3EAD7 0%, #EFE4CD 45%, rgba(239, 228, 205, 0) 100%);
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .7), 0 -0.5rem 1.25rem -0.75rem rgba(59, 26, 13, .18);
+  height: 12%;
+  border-radius: 0.875rem 0.875rem 0.5rem 0.5rem;
+  background:
+    /* 점장 몸이 상판 뒤쪽에 드리우는 옅은 그림자 */
+    radial-gradient(38% 22% at 50% 0%, rgba(59, 26, 13, .10), rgba(59, 26, 13, 0)),
+    linear-gradient(180deg, #F4ECDC 0%, #F1E7D4 80%, #E5D6BC 80.5%, #DFCFB3 100%);
 }
 .mgr-prop { position: absolute; z-index: 3; display: block; }
 .mgr-prop img { position: relative; z-index: 1; display: block; width: 100%; height: auto; }
-/* 접지 그림자 — 상판에 닿는 바닥 자리만 옅게 */
+/* 접지 그림자 — 물체 바로 아래, 작고 진하게. 넓게 퍼지지 않도록 */
 .mgr-prop::after {
   content: "";
   position: absolute;
-  left: 8%;
-  right: 8%;
-  bottom: -6%;
-  height: 16%;
   border-radius: 50%;
-  background: radial-gradient(closest-side, rgba(59, 26, 13, .22), rgba(59, 26, 13, 0));
+  background: radial-gradient(closest-side, rgba(45, 28, 18, .34), rgba(45, 28, 18, 0));
 }
-/* 컵: 점장 왼쪽 아래 — 팔·태블릿과 떨어진 자리 */
-.mgr-prop--cup { width: 21%; left: 3%; top: 88.5%; }
-/* 노트북: 점장 오른쪽 아래, 화면이 점장 쪽을 향하도록 원본 방향 그대로 */
-.mgr-prop--laptop { width: 49%; left: 59%; top: 91%; }
-.mgr-prop--laptop::after { left: 2%; right: 4%; bottom: -4%; height: 14%; }
+/* 컵: 점장 왼쪽 아래, 몸과 한 뼘 떨어져 상판 위에 */
+.mgr-prop--cup { width: 25%; left: -12%; bottom: -1.5%; }
+.mgr-prop--cup img { filter: drop-shadow(0 1px 1px rgba(45, 28, 18, .22)); }
+.mgr-prop--cup::after { left: 14%; right: 14%; bottom: -3.5%; height: 9%; }
+/* 노트북: 점장 오른쪽 아래, 화면이 점장 쪽을 향하는 원본 방향 그대로. 손과 태블릿은 피한다 */
+.mgr-prop--laptop { width: 54%; left: 60%; bottom: -2%; }
+.mgr-prop--laptop img { filter: drop-shadow(0 1.5px 1.5px rgba(45, 28, 18, .26)); }
+.mgr-prop--laptop::after { left: 2%; right: 20%; bottom: -2%; height: 9%; rotate: 8deg; }
 
 /* 말풍선 — 점장이 직접 건네는 한마디. 크림 화이트 + 아주 옅은 그림자 + 캐릭터를 향한 작은 꼬리 */
 .mgr-stat {
@@ -1531,6 +1532,10 @@ p { text-wrap: pretty; }
 }
 
 /* 헤더 · 히어로 — 768px 이하 */
+/* 점장 — 중간 폭: 책상 소품이 옆 말풍선에 닿지 않게 가운데 장면을 조금 줄인다 */
+@media (min-width: 761px) and (max-width: 1200px) {
+  .mgr-grid { grid-template-columns: minmax(0, 1fr) 27vw minmax(0, 1fr); column-gap: 4.25rem; }
+}
 /* 점장 — 좁은 화면에선 캐릭터를 위에, 말풍선은 대화처럼 좌우로 번갈아 한 줄씩 */
 @media (max-width: 760px) {
   .mgr-grid {
@@ -1538,7 +1543,7 @@ p { text-wrap: pretty; }
     grid-template-areas: "fig" "tl" "bl" "tr" "br";
     row-gap: 0.875rem;
   }
-  .mgr-fig { width: min(64%, 16rem); justify-self: center; margin-bottom: 3.75rem; }
+  .mgr-fig { width: min(62%, 15.5rem); justify-self: center; margin-bottom: 2.75rem; }
   .mgr-stat { padding: 1.125rem 1.25rem 1.125rem; border-radius: 1.375rem; }
   .mgr-stat--tl, .mgr-stat--bl, .mgr-stat--tr, .mgr-stat--br { width: min(88%, 21rem); translate: none; align-self: auto; }
   .mgr-stat--tl, .mgr-stat--tr { justify-self: start; transform-origin: 0 0; }
