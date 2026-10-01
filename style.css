@@ -611,6 +611,10 @@ p { text-wrap: pretty; }
 .manager__inner { max-width: 82rem; margin-inline: auto; }
 .manager__lead { font-size: 0.72em; color: var(--ink-soft); }
 .manager__head .sec-sub { font-weight: 400; }
+/* 제목 블록은 섹션 가운데에, 글자도 가운데 정렬 */
+.manager__head { text-align: center; }
+.manager__head .sec-title,
+.manager__head .sec-sub { margin-inline: auto; }
 
 /* 가운데 캐릭터 | 양옆 말풍선 2개씩 — 꼬리가 캐릭터를 향해 한 그룹으로 묶인다 */
 .mgr-grid {
