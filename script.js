@@ -291,18 +291,54 @@
   };
 
   /* ---------- 5. 가맹 절차 연결선 ---------- */
+  // 섹션이 화면에 들어오면 한 번 자동 재생: 선이 일정한 속도로 차오르고, 선이 각 번호에 닿는 순간 그 단계가 켜진다.
+  // 05가 켜지면 위의 반짝 낙서가 함께 터진다
   const steps = document.getElementById('steps');
+  const stepsTrack = steps.querySelector('.steps__track');
   const stepsFill = document.getElementById('stepsFill');
+  const stepsBurst = document.getElementById('stepsBurst');
   const stepItems = [...steps.querySelectorAll('.step')];
+  const STEPS_DURATION = 2200;
 
-  const updateSteps = () => {
-    const vh = window.innerHeight;
-    const progress = reduceMotion ? 1 : clamp((vh * 0.8 - steps.getBoundingClientRect().top) / (vh * 0.45));
-    stepsFill.style.transform = `scaleX(${progress})`;
-    stepItems.forEach((step, i) => {
-      step.classList.toggle('is-on', progress >= i / (stepItems.length - 1) - 0.001 && progress > 0);
+  // 선 길이 대비 각 번호 중심의 위치(0~1) — 가로(PC) · 세로(모바일) 모두
+  const stepStops = () => {
+    const t = stepsTrack.getBoundingClientRect();
+    const vertical = t.height > t.width;
+    return stepItems.map(step => {
+      const n = step.querySelector('.step__num').getBoundingClientRect();
+      const pos = vertical ? (n.top + n.height / 2 - t.top) / t.height : (n.left + n.width / 2 - t.left) / t.width;
+      return { pos: clamp(pos), vertical };
     });
   };
+
+  const playSteps = () => {
+    const stops = stepStops();
+    const last = stops[stops.length - 1];
+    const axis = last.vertical ? 'scaleY' : 'scaleX';
+    const finish = () => stepsBurst.classList.add('is-in');
+    if (reduceMotion) {
+      stepsFill.style.transform = `${axis}(${last.pos})`;
+      stepItems.forEach(step => step.classList.add('is-on'));
+      finish();
+      return;
+    }
+    const duration = STEPS_DURATION * last.pos;
+    stepsFill.style.transition = `transform ${duration}ms linear`;
+    requestAnimationFrame(() => { stepsFill.style.transform = `${axis}(${last.pos})`; });
+    stops.forEach((stop, i) => {
+      setTimeout(() => {
+        stepItems[i].classList.add('is-on');
+        if (i === stops.length - 1) finish();
+      }, STEPS_DURATION * stop.pos);
+    });
+  };
+
+  const stepsObserver = new IntersectionObserver(entries => {
+    if (!entries[0].isIntersecting) return;
+    stepsObserver.disconnect();
+    playSteps();
+  }, { threshold: 0.5 });
+  stepsObserver.observe(steps);
 
   /* ---------- 스크롤 루프 ---------- */
   let ticking = false;
@@ -312,7 +348,6 @@
     requestAnimationFrame(() => {
       updateHeader();
       updateDay();
-      updateSteps();
       ticking = false;
     });
   };
@@ -326,7 +361,6 @@
   updateHeader();
   wordmark.classList.add('is-ready');
   updateDay();
-  updateSteps();
 
   /* ---------- 6. FAQ 아코디언 ---------- */
   const accItems = [...document.querySelectorAll('.acc-item')];
